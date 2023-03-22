@@ -1,0 +1,944 @@
+{"0": {
+    "doc": "add_entries",
+    "title": "add_entries",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/add-entries/",
+    "relUrl": "/pipelines/configuration/processors/add-entries/"
+  },"1": {
+    "doc": "add_entries",
+    "title": "Overview",
+    "content": "The add_entries processor adds an entry to the event and is a mutate event processor. The following table describes the options you can use to configure the add_entries processor. | Option | Required | Type | Description | . | entries | Yes | List | List of events to be added. Valid entries are key, value, and overwrite_if_key_exists. | . | key | N/A | N/A | Key of the new event to be added. | . | value | N/A | N/A | Value of the new entry to be added. Valid data types are strings, booleans, numbers, null, nested objects, and arrays containing the aforementioned data types. | . | overwrite_if_key_exists | No | Boolean | If true, the existing value is overwritten if the key already exists within the event. Default value is false. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/add-entries/#overview",
+    "relUrl": "/pipelines/configuration/processors/add-entries/#overview"
+  },"2": {
+    "doc": "aggregate",
+    "title": "aggregate",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/aggregate/",
+    "relUrl": "/pipelines/configuration/processors/aggregate/"
+  },"3": {
+    "doc": "aggregate",
+    "title": "Overview",
+    "content": "The aggregate processor groups events based on the keys provided and performs an action on each group. The following table describes the options you can use to configure the aggregate processor. | Option | Required | Type | Description | . | identification_keys | Yes | List | An unordered list by which to group events. Events with the same values as these keys are put into the same group. If an event does not contain one of the identification_keys, then the value of that key is considered to be equal to null. At least one identification_key is required (for example, [\"sourceIp\", \"destinationIp\", \"port\"]). | . | action | Yes | AggregateAction | The action to be performed for each group. One of the available aggregate actions must be provided or you can create custom aggregate actions. remove_duplicates and put_all are the available actions. For more information, see Creating New Aggregate Actions. | . | group_duration | No | String | The amount of time that a group should exist before it is concluded automatically. Supports ISO_8601 notation strings (“PT20.345S”, “PT15M”, etc.) as well as simple notation for seconds (\"60s\") and milliseconds (\"1500ms\"). Default value is 180s. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/aggregate/#overview",
+    "relUrl": "/pipelines/configuration/processors/aggregate/#overview"
+  },"4": {
+    "doc": "aggregate",
+    "title": "Metrics",
+    "content": "The following table describes common Abstract processor metrics. | Metric name | Type | Description | . | recordsIn | Counter | Metric representing the ingress of records to a pipeline component. | . | recordsOut | Counter | Metric representing the egress of records from a pipeline component. | . | timeElapsed | Timer | Metric representing the time elapsed during execution of a pipeline component. | . The aggregate processor includes the following custom metrics. Counter . | actionHandleEventsOut: The number of events that have been returned from the handleEvent call to the configured action. | actionHandleEventsDropped: The number of events that have not been returned from the handleEvent call to the configured action. | actionHandleEventsProcessingErrors: The number of calls made to handleEvent for the configured action that resulted in an error. | actionConcludeGroupEventsOut: The number of events that have been returned from the concludeGroup call to the configured action. | actionConcludeGroupEventsDropped: The number of events that have not been returned from the condludeGroup call to the configured action. | actionConcludeGroupEventsProcessingErrors: The number of calls made to concludeGroup for the configured action that resulted in an error. | . Gauge . | currentAggregateGroups: The current number of groups. This gauge decreases when a group concludes and increases when an event initiates the creation of a new group. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/aggregate/#metrics",
+    "relUrl": "/pipelines/configuration/processors/aggregate/#metrics"
+  },"5": {
+    "doc": "Bounded blocking",
+    "title": "Bounded blocking",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/buffers/bounded-blocking/",
+    "relUrl": "/pipelines/configuration/buffers/bounded-blocking/"
+  },"6": {
+    "doc": "Bounded blocking",
+    "title": "Overview",
+    "content": "Bounded blocking is the default buffer and is memory based. The following table describes the Bounded blocking parameters. | Option | Required | Type | Description | . | buffer_size | No | Integer | The maximum number of records the buffer accepts. Default value is 12800. | . | batch_size | No | Integer | The maximum number of records the buffer drains after each read. Default value is 200. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/buffers/bounded-blocking/#overview",
+    "relUrl": "/pipelines/configuration/buffers/bounded-blocking/#overview"
+  },"7": {
+    "doc": "Buffers",
+    "title": "Buffers",
+    "content": "Buffers store data as it passes through the pipeline. If you implement a custom buffer, it can be memory based, which provides better performance, or disk based, which is larger in size. ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/buffers/buffers/",
+    "relUrl": "/pipelines/configuration/buffers/buffers/"
+  },"8": {
+    "doc": "Common use cases",
+    "title": "Common use cases",
+    "content": "You can use Data Prepper for several different purposes, including trace analytics, log analytics, Amazon S3 log analytics, and metrics ingestion. ",
+    "url": "https://naarcha-aws.github.io/common-use-cases/common-use-cases/",
+    "relUrl": "/common-use-cases/common-use-cases/"
+  },"9": {
+    "doc": "Configuring Data Prepper",
+    "title": "Configuring Data Prepper",
+    "content": "This is the reference for Data Prepper configuration files (data-prepper-config.yaml). These are general Data Prepper configurations independent from pipelines. ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/configuring-data-prepper/",
+    "relUrl": "/managing-data-prepper/configuring-data-prepper/"
+  },"10": {
+    "doc": "Configuring Data Prepper",
+    "title": "Data Prepper server options",
+    "content": "| Option | Required | Type | Description | . | ssl | No | Boolean | Indicates whether TLS should be used for server APIs. Defaults to true. | . | keyStoreFilePath | No | String | Path to a .jks or .p12 keystore file. Required if ssl is true. | . | keyStorePassword | No | String | Password for keystore. Optional, defaults to empty string. | . | privateKeyPassword | No | String | Password for private key within keystore. Optional, defaults to empty string. | . | serverPort | No | Integer | Port number to use for server APIs. Defaults to 4900. | . | metricRegistries | No | List | Metrics registries for publishing the generated metrics. Currently supports Prometheus and CloudWatch. Defaults to Prometheus. | . | metricTags | No | Map | Key-value pairs as common metric tags to metric registries. The maximum number of pairs is three. Note that serviceName is a reserved tag key with DataPrepper as default tag value. Alternatively, administrators can set this value through the environment variable DATAPREPPER_SERVICE_NAME. If serviceName is defined in metricTags, that value overwrites those set through the above methods. | . | authentication | No | Object | Authentication configuration. Valid option is http_basic with username and password properties. If not defined, the server does not perform authentication. | . | processorShutdownTimeout | No | Duration | Time given to processors to clear any in-flight data and gracefully shutdown. Default is 30s. | . | sinkShutdownTimeout | No | Duration | Time given to sinks to clear any in-flight data and gracefully shutdown. Default is 30s. | . | peer_forwarder | No | Object | Peer forwarder configurations. See Peer forwarder options for more details. | . Peer forwarder options . The following section details various configuration options for peer forwarder. General options for peer forwarding . | Option | Required | Type | Description | . | port | No | Integer | The peer forwarding server port. Valid options are between 0 and 65535. Defaults is 4994. | . | request_timeout | No | Integer | Request timeout for the peer forwarder HTTP server in milliseconds. Default is 10000. | . | server_thread_count | No | Integer | Number of threads used by the peer forwarder server. Default is 200. | . | client_thread_count | No | Integer | Number of threads used by the peer forwarder client. Default is 200. | . | max_connection_count | No | Integer | Maximum number of open connections for the peer forwarder server. Default is 500. | . | max_pending_requests | No | Integer | Maximum number of allowed tasks in ScheduledThreadPool work queue. Default is 1024. | . | discovery_mode | No | String | Peer discovery mode to use. Valid options are local_node, static, dns, or aws_cloud_map. Defaults to local_node, which processes events locally. | . | static_endpoints | Conditionally | List | A list containing endpoints of all Data Prepper instances. Required if discovery_mode is set to static. | . | domain_name | Conditionally | String | A single domain name to query DNS against. Typically, used by creating multiple DNS A Records for the same domain. Required if discovery_mode is set to dns. | . | aws_cloud_map_namespace_name | Conditionally | String | Cloud Map namespace when using AWS Cloud Map service discovery. Required if discovery_mode is set to aws_cloud_map. | . | aws_cloud_map_service_name | Conditionally | String | Cloud Map service name when using AWS Cloud Map service discovery. Required if discovery_mode is set to aws_cloud_map. | . | aws_cloud_map_query_parameters | No | Map | Key-value pairs to filter the results based on the custom attributes attached to an instance. Only instances that match all the specified key-value pairs are returned. | . | buffer_size | No | Integer | Max number of unchecked records the buffer accepts. Number of unchecked records is the sum of the number of records written into the buffer and the num of in-flight records not yet checked by the Checkpointing API. Default is 512. | . | batch_size | No | Integer | Max number of records the buffer returns on read. Default is 48. | . | aws_region | Conditionally | String | AWS region to use ACM, S3 or AWS Cloud Map. Required if use_acm_certificate_for_ssl is set to true or ssl_certificate_file and ssl_key_file is AWS S3 path or discovery_mode is set to aws_cloud_map. | . | drain_timeout | No | Duration | Wait time for the peer forwarder to complete processing data before shutdown. Default is 10s. | . TLS/SSL options for peer forwarder . | Option | Required | Type | Description | . | ssl | No | Boolean | Enables TLS/SSL. Default is true. | . | ssl_certificate_file | Conditionally | String | SSL certificate chain file path or AWS S3 path. S3 path example s3://&lt;bucketName&gt;/&lt;path&gt;. Required if ssl is true and use_acm_certificate_for_ssl is false. Defaults to config/default_certificate.pem which is the default certificate file. Read more about how the certificate file is generated here. | . | ssl_key_file | Conditionally | String | SSL key file path or AWS S3 path. S3 path example s3://&lt;bucketName&gt;/&lt;path&gt;. Required if ssl is true and use_acm_certificate_for_ssl is false. Defaults to config/default_private_key.pem which is the default private key file. Read more about how the default private key file is generated here. | . | ssl_insecure_disable_verification | No | Boolean | Disables the verification of server’s TLS certificate chain. Default is false. | . | ssl_fingerprint_verification_only | No | Boolean | Disables the verification of server’s TLS certificate chain and instead verifies only the certificate fingerprint. Default is false. | . | use_acm_certificate_for_ssl | No | Boolean | Enables TLS/SSL using certificate and private key from AWS Certificate Manager (ACM). Default is false. | . | acm_certificate_arn | Conditionally | String | ACM certificate ARN. The ACM certificate takes preference over S3 or a local file system certificate. Required if use_acm_certificate_for_ssl is set to true. | . | acm_private_key_password | No | String | ACM private key password that decrypts the private key. If not provided, Data Prepper generates a random password. | . | acm_certificate_timeout_millis | No | Integer | Timeout in milliseconds for ACM to get certificates. Default is 120000. | . | aws_region | Conditionally | String | AWS region to use ACM, S3 or AWS Cloud Map. Required if use_acm_certificate_for_ssl is set to true or ssl_certificate_file and ssl_key_file is AWS S3 path or discovery_mode is set to aws_cloud_map. | . Authentication options for peer forwarder . | Option | Required | Type | Description | . | authentication | No | Map | Authentication method to use. Valid options are mutual_tls (use mTLS) or unauthenticated (no authentication). Default is unauthenticated. | . ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/configuring-data-prepper/#data-prepper-server-options",
+    "relUrl": "/managing-data-prepper/configuring-data-prepper/#data-prepper-server-options"
+  },"11": {
+    "doc": "Configuring Log4j",
+    "title": "Configuring Log4j",
+    "content": "You can configure logging using Log4j in Data Prepper. ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/configuring-log4j/",
+    "relUrl": "/managing-data-prepper/configuring-log4j/"
+  },"12": {
+    "doc": "Configuring Log4j",
+    "title": "Logging",
+    "content": "Data Prepper uses SLF4J with a Log4j 2 binding. For Data Prepper versions 2.0 and later, the Log4j 2 configuration file can be found and edited in config/log4j2.properties in the application’s home directory. The default properties for Log4j 2 can be found in log4j2-rolling.properties in the shared-config directory. For Data Prepper versions before 2.0, the Log4j 2 configuration file can be overridden by setting the log4j.configurationFile system property when running Data Prepper. The default properties for Log4j 2 can be found in log4j2.properties in the shared-config directory. Example . When running Data Prepper, the following command can be overridden by setting the system property -Dlog4j.configurationFile={property_value}, where {property_value} is a path to the Log4j 2 configuration file: . java \"-Dlog4j.configurationFile=config/custom-log4j2.properties\" -jar data-prepper-core-$VERSION.jar pipelines.yaml data-prepper-config.yaml . See the Log4j 2 configuration documentation for more information about Log4j 2 configuration. ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/configuring-log4j/#logging",
+    "relUrl": "/managing-data-prepper/configuring-log4j/#logging"
+  },"13": {
+    "doc": "copy_values",
+    "title": "copy_values",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/copy-values/",
+    "relUrl": "/pipelines/configuration/processors/copy-values/"
+  },"14": {
+    "doc": "copy_values",
+    "title": "Overview",
+    "content": "The copy_values processor copies values within an event and is a mutate event processor. The following table describes the options you can use to configure the copy_values processor. | Option | Required | Type | Description | . | entries | Yes | List | The list of entries to be copied. Valid values are from_key, to_key, and overwrite_if_key_exists. | . | from_key | N/A | N/A | The key of the entry to be copied. | . | to_key | N/A | N/A | The key of the new entry to be added. | . | overwrite_if_to_key_exists | No | Boolean | If true, the existing value is overwritten if the key already exists within the event. Default value is false. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/copy-values/#overview",
+    "relUrl": "/pipelines/configuration/processors/copy-values/#overview"
+  },"15": {
+    "doc": "Core APIs",
+    "title": "Core APIs",
+    "content": "All Data Prepper instances expose a server with some control APIs. By default, this server runs on port 4900. Some plugins, especially source plugins, may expose other servers that run on different ports. Configurations for these plugins are independent of the core API. For example, to shut down Data Prepper, you can run the following curl request: . curl -X POST http://localhost:4900/shutdown . ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/core-apis/",
+    "relUrl": "/managing-data-prepper/core-apis/"
+  },"16": {
+    "doc": "Core APIs",
+    "title": "APIs",
+    "content": "The following table lists the available APIs. | Name | Description | . | GET /listPOST /list | Returns a list of running pipelines. | . | POST /shutdown | Starts a graceful shutdown of Data Prepper. | . | GET /metrics/prometheusPOST /metrics/prometheus | Returns a scrape of Data Prepper metrics in Prometheus text format. This API is available as a metricsRegistries parameter in the Data Prepper configuration file data-prepper-config.yaml and contains Prometheus as part of the registry. | . | GET /metrics/sysPOST /metrics/sys | Returns JVM metrics in Prometheus text format. This API is available as a metricsRegistries parameter in the Data Prepper configuration file data-prepper-config.yaml and contains Prometheus as part of the registry. | . ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/core-apis/#apis",
+    "relUrl": "/managing-data-prepper/core-apis/#apis"
+  },"17": {
+    "doc": "Core APIs",
+    "title": "Configuring the server",
+    "content": "You can configure your Data Prepper core APIs through the data-prepper-config.yaml file. SSL/TLS connection . Many of the getting started guides for this project disable SSL on the endpoint: . ssl: false . To enable SSL on your Data Prepper endpoint, configure your data-prepper-config.yaml file with the following options: . ssl: true keyStoreFilePath: \"/usr/share/data-prepper/keystore.p12\" keyStorePassword: \"secret\" privateKeyPassword: \"secret\" . For more information about configuring your Data Prepper server with SSL, see Server Configuration. If you are using a self-signed certificate, you can add the -k flag to the request to quickly test core APIs with SSL. Use the following shutdown request to test core APIs with SSL: . curl -k -X POST https://localhost:4900/shutdown . Authentication . The Data Prepper core APIs support HTTP basic authentication. You can set the username and password with the following configuration in the data-prepper-config.yaml file: . authentication: http_basic: username: \"myuser\" password: \"mys3cr3t\" . You can disable authentication of core endpoints using the following configuration. Use this with caution because the shutdown API and others will be accessible to anybody with network access to your Data Prepper instance. authentication: unauthenticated: . Peer Forwarder . Peer Forwarder can be configured to enable stateful aggregation across multiple Data Prepper nodes. For more information about configuring Peer Forwarder, see Peer forwarder. It is supported by the service_map_stateful, otel_trace_raw, and aggregate processors. Shutdown timeouts . When you run the Data Prepper shutdown API, the process gracefully shuts down and clears any remaining data for both the ExecutorService sink and ExecutorService processor. The default timeout for shutdown of both processes is 10 seconds. You can configure the timeout with the following optional data-prepper-config.yaml file parameters: . processorShutdownTimeout: \"PT15M\" sinkShutdownTimeout: 30s . The values for these parameters are parsed into a Duration object through the Data Prepper Duration Deserializer. ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/core-apis/#configuring-the-server",
+    "relUrl": "/managing-data-prepper/core-apis/#configuring-the-server"
+  },"18": {
+    "doc": "csv",
+    "title": "csv",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/csv/",
+    "relUrl": "/pipelines/configuration/processors/csv/"
+  },"19": {
+    "doc": "csv",
+    "title": "Overview",
+    "content": "The csv processor parses comma-separated values (CSVs) from the event into columns. The following table describes the options you can use to configure the csv processor. | Option | Required | Type | Description | . | source | No | String | The field in the event that will be parsed. Default value is message. | . | quote_character | No | String | The character used as a text qualifier for a single column of data. Default value is \". | . | delimiter | No | String | The character separating each column. Default value is ,. | . | delete_header | No | Boolean | If specified, the event header (column_names_source_key) is deleted after the event is parsed. If there is no event header, no action is taken. Default value is true. | . | column_names_source_key | No | String | The field in the event that specifies the CSV column names, which will be automatically detected. If there need to be extra column names, the column names are automatically generated according to their index. If column_names is also defined, the header in column_names_source_key can also be used to generate the event fields. If too few columns are specified in this field, the remaining column names are automatically generated. If too many column names are specified in this field, the CSV processor omits the extra column names. | . | column_names | No | List | User-specified names for the CSV columns. Default value is [column1, column2, ..., columnN] if there are no columns of data in the CSV record and column_names_source_key is not defined. If column_names_source_key is defined, the header in column_names_source_key generates the event fields. If too few columns are specified in this field, the remaining column names are automatically generated. If too many column names are specified in this field, the CSV processor omits the extra column names. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/csv/#overview",
+    "relUrl": "/pipelines/configuration/processors/csv/#overview"
+  },"20": {
+    "doc": "csv",
+    "title": "Metrics",
+    "content": "The following table describes common Abstract processor metrics. | Metric name | Type | Description | . | recordsIn | Counter | Metric representing the ingress of records to a pipeline component. | . | recordsOut | Counter | Metric representing the egress of records from a pipeline component. | . | timeElapsed | Timer | Metric representing the time elapsed during execution of a pipeline component. | . The csv processor includes the following custom metrics. Counter . | csvInvalidEvents: The number of invalid events. An exception is thrown when an invalid event is parsed. An unclosed quote usually causes this exception. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/csv/#metrics",
+    "relUrl": "/pipelines/configuration/processors/csv/#metrics"
+  },"21": {
+    "doc": "date",
+    "title": "date",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/date/",
+    "relUrl": "/pipelines/configuration/processors/date/"
+  },"22": {
+    "doc": "date",
+    "title": "Overview",
+    "content": "The date processor adds a default timestamp to an event, parses timestamp fields, and converts timestamp information to the International Organization for Standardization (ISO) 8601 format. This timestamp information can be used as an event timestamp. The following table describes the options you can use to configure the date processor. | Option | Required | Type | Description | . | match | Conditionally | List | List of key and patterns where patterns is a list. The list of match can have exactly one key and patterns. There is no default value. This option cannot be defined at the same time as from_time_received. Include multiple date processors in your pipeline if both options should be used. | . | from_time_received | Conditionally | Boolean | A boolean that is used for adding default timestamp to event data from event metadata which is the time when source receives the event. Default value is false. This option cannot be defined at the same time as match. Include multiple date processors in your pipeline if both options should be used. | . | destination | No | String | Field to store the timestamp parsed by date processor. It can be used with both match and from_time_received. Default value is @timestamp. | . | source_timezone | No | String | Time zone used to parse dates. It is used in case the zone or offset cannot be extracted from the value. If the zone or offset are part of the value, then timezone is ignored. Find all the available timezones the list of database time zones in the TZ database name column. | . | destination_timezone | No | String | Timezone used for storing timestamp in destination field. The available timezone values are the same as source_timestamp. | . | locale | No | String | Locale is used for parsing dates. It’s commonly used for parsing month names(MMM). It can have language, country and variant fields using IETF BCP 47 or String representation of Locale object. For example en-US for IETF BCP 47 and en_US for string representation of Locale. Full list of locale fields which includes language, country and variant can be found the language subtag registry. Default value is Locale.ROOT. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/date/#overview",
+    "relUrl": "/pipelines/configuration/processors/date/#overview"
+  },"23": {
+    "doc": "date",
+    "title": "Metrics",
+    "content": "The following table describes common Abstract processor metrics. | Metric name | Type | Description | . | recordsIn | Counter | Metric representing the ingress of records to a pipeline component. | . | recordsOut | Counter | Metric representing the egress of records from a pipeline component. | . | timeElapsed | Timer | Metric representing the time elapsed during execution of a pipeline component. | . The date processor includes the following custom metrics. | dateProcessingMatchSuccessCounter: Returns the number of records that match with at least one pattern specified by the match configuration option. | dateProcessingMatchFailureCounter: Returns the number of records that did not match any of the patterns specified by the patterns match configuration option. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/date/#metrics",
+    "relUrl": "/pipelines/configuration/processors/date/#metrics"
+  },"24": {
+    "doc": "delete_entries",
+    "title": "delete_entries",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/delete-entries/",
+    "relUrl": "/pipelines/configuration/processors/delete-entries/"
+  },"25": {
+    "doc": "delete_entries",
+    "title": "Overview",
+    "content": "The delete_entries processor deletes entries in an event and is a mutate event processor. The following table describes the options you can use to configure the delete-entries processor. | Option | Required | Type | Description | . | with_keys | Yes | List | An array of keys of the entries to be deleted. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/delete-entries/#overview",
+    "relUrl": "/pipelines/configuration/processors/delete-entries/#overview"
+  },"26": {
+    "doc": "drop_events",
+    "title": "drop_events",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/drop-events/",
+    "relUrl": "/pipelines/configuration/processors/drop-events/"
+  },"27": {
+    "doc": "drop_events",
+    "title": "Overview",
+    "content": "The drop_events processor drops all the events that are passed into it. The following table describes when events are dropped and how exceptions for dropping events are handled. | Option | Required | Type | Description | . | drop_when | Yes | String | Accepts a Data Prepper expression string following the Data Prepper Expression Syntax. Configuring drop_events with drop_when: true drops all the events received. | . | handle_failed_events | No | Enum | Specifies how exceptions are handled when an exception occurs while evaluating an event. Default value is drop, which drops the event so that it is not sent to OpenSearch. Available options are drop, drop_silently, skip, and skip_silently. For more information, see handle_failed_events. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/drop-events/#overview",
+    "relUrl": "/pipelines/configuration/processors/drop-events/#overview"
+  },"28": {
+    "doc": "Expression syntax",
+    "title": "Expression syntax",
+    "content": "The following sections provide information about expression syntax in Data Prepper. ",
+    "url": "https://naarcha-aws.github.io/pipelines/expression-syntax/",
+    "relUrl": "/pipelines/expression-syntax/"
+  },"29": {
+    "doc": "Expression syntax",
+    "title": "Supported operators",
+    "content": "Operators are listed in order of precedence (top to bottom, left to right). | Operator | Description | Associativity | . | () | Priority Expression | left-to-right | . | not + - | Unary Logical NOTUnary PositiveUnary negative | right-to-left | . | &lt;, &lt;=, &gt;, &gt;= | Relational Operators | left-to-right | . | ==, != | Equality Operators | left-to-right | . | and, or | Conditional Expression | left-to-right | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/expression-syntax/#supported-operators",
+    "relUrl": "/pipelines/expression-syntax/#supported-operators"
+  },"30": {
+    "doc": "Expression syntax",
+    "title": "Reserved for possible future functionality",
+    "content": "Reserved symbol set: ^, *, /, %, +, -, xor, =, +=, -=, *=, /=, %=, ++, --, ${&lt;text&gt;} . ",
+    "url": "https://naarcha-aws.github.io/pipelines/expression-syntax/#reserved-for-possible-future-functionality",
+    "relUrl": "/pipelines/expression-syntax/#reserved-for-possible-future-functionality"
+  },"31": {
+    "doc": "Expression syntax",
+    "title": "Set initializer",
+    "content": "The set initializer defines a set or term and/or expressions. Examples . The following are examples of set initializer syntax. HTTP status codes . {200, 201, 202} . HTTP response payloads . {\"Created\", \"Accepted\"} . Handle multiple event types with different keys . {/request_payload, /request_message} . ",
+    "url": "https://naarcha-aws.github.io/pipelines/expression-syntax/#set-initializer",
+    "relUrl": "/pipelines/expression-syntax/#set-initializer"
+  },"32": {
+    "doc": "Expression syntax",
+    "title": "Priority expression",
+    "content": "A priority expression identifies an expression that will be evaluated at the highest priority level. A priority expression must contain an expression or value; empty parentheses are not supported. Example . /is_cool == (/name == \"Steven\") . ",
+    "url": "https://naarcha-aws.github.io/pipelines/expression-syntax/#priority-expression",
+    "relUrl": "/pipelines/expression-syntax/#priority-expression"
+  },"33": {
+    "doc": "Expression syntax",
+    "title": "Relational operators",
+    "content": "Relational operators are used to test the relationship of two numeric values. The operands must be numbers or JSON Pointers that resolve to numbers. Syntax . &lt;Number | JSON Pointer&gt; &lt; &lt;Number | JSON Pointer&gt; &lt;Number | JSON Pointer&gt; &lt;= &lt;Number | JSON Pointer&gt; &lt;Number | JSON Pointer&gt; &gt; &lt;Number | JSON Pointer&gt; &lt;Number | JSON Pointer&gt; &gt;= &lt;Number | JSON Pointer&gt; . Example . /status_code &gt;= 200 and /status_code &lt; 300 . ",
+    "url": "https://naarcha-aws.github.io/pipelines/expression-syntax/#relational-operators",
+    "relUrl": "/pipelines/expression-syntax/#relational-operators"
+  },"34": {
+    "doc": "Expression syntax",
+    "title": "Equality operators",
+    "content": "Equality operators are used to test whether two values are equivalent. Syntax . &lt;Any&gt; == &lt;Any&gt; &lt;Any&gt; != &lt;Any&gt; . Examples . /is_cool == true 3.14 != /status_code {1, 2} == /event/set_property . ",
+    "url": "https://naarcha-aws.github.io/pipelines/expression-syntax/#equality-operators",
+    "relUrl": "/pipelines/expression-syntax/#equality-operators"
+  },"35": {
+    "doc": "Expression syntax",
+    "title": "Using equality operators to check for a JSON Pointer",
+    "content": "Equality operators can also be used to check whether a JSON Pointer exists by comparing the value with null. Syntax . &lt;JSON Pointer&gt; == null &lt;JSON Pointer&gt; != null null == &lt;JSON Pointer&gt; null != &lt;JSON Pointer&gt; . Example . /response == null null != /response . Conditional expression . A conditional expression is used to chain together multiple expressions and/or values. Syntax . &lt;Any&gt; and &lt;Any&gt; &lt;Any&gt; or &lt;Any&gt; not &lt;Any&gt; . Example . /status_code == 200 and /message == \"Hello world\" /status_code == 200 or /status_code == 202 not /status_code in {200, 202} /response == null /response != null . ",
+    "url": "https://naarcha-aws.github.io/pipelines/expression-syntax/#using-equality-operators-to-check-for-a-json-pointer",
+    "relUrl": "/pipelines/expression-syntax/#using-equality-operators-to-check-for-a-json-pointer"
+  },"36": {
+    "doc": "Expression syntax",
+    "title": "Definitions",
+    "content": "This section provides expression definitions. Literal . A literal is a fundamental value that has no children: . | Float: Supports values from 3.40282347 × 1038 to 1.40239846 × 10−45. | Integer: Supports values from −2,147,483,648 to 2,147,483,647. | Boolean: Supports true or false. | JSON Pointer: See the JSON Pointer section for details. | String: Supports valid Java strings. | Null: Supports null check to see whether a JSON Pointer exists. | . Expression string . An expression string takes the highest priority in a Data Prepper expression and only supports one expression string resulting in a return value. An expression string is not the same as an expression. Statement . A statement is the highest-priority component of an expression string. Expression . An expression is a generic component that contains a Primary or an Operator. Expressions may contain expressions. An expression’s imminent children can contain 0–1 Operators. Primary . | Set | Priority Expression | Literal | . Operator . An operator is a hardcoded token that identifies the operation used in an expression. JSON Pointer . A JSON Pointer is a literal used to reference a value within an event and provided as context for an expression string. JSON Pointers are identified by a leading / containing alphanumeric characters or underscores, delimited by /. JSON Pointers can use an extended character set if wrapped in double quotes (\") using the escape character \\. Note that JSON Pointers require ~ and / characters, which should be used as part of the path and not as a delimiter that needs to be escaped. The following are examples of JSON Pointers: . | ~0 representing ~ | ~1 representing / | . Shorthand syntax (Regex, \\w = [A-Za-z_]) . /\\w+(/\\w+)* . Example of shorthand . The following is an example of shorthand: . /Hello/World/0 . Example of escaped syntax . The following is an example of escaped syntax: . \"/&lt;Valid String Characters | Escaped Character&gt;(/&lt;Valid String Characters | Escaped Character&gt;)*\" . Example of an escaped JSON Pointer . The following is an example of an escaped JSON Pointer: . # Path # { \"Hello - 'world/\" : [{ \"\\\"JsonPointer\\\"\": true }] } \"/Hello - 'world\\//0/\\\"JsonPointer\\\"\" . ",
+    "url": "https://naarcha-aws.github.io/pipelines/expression-syntax/#definitions",
+    "relUrl": "/pipelines/expression-syntax/#definitions"
+  },"37": {
+    "doc": "Expression syntax",
+    "title": "White space",
+    "content": "White space is optional surrounding relational operators, regex equality operators, equality operators, and commas. White space is required surrounding set initializers, priority expressions, set operators, and conditional expressions. | Operator | Description | White space required | ✅ Valid examples | ❌ Invalid examples | . | {} | Set initializer | Yes | /status in {200} | /status in{200} | . | () | Priority expression | Yes | /a==(/b==200)/a in ({200}) | /status in({200}) | . | in, not in | Set operators | Yes | /a in {200}/a not in {400} | /a in{200, 202}/a not in{400} | . | &lt;, &lt;=, &gt;, &gt;= | Relational operators | No | /status &lt; 300/status&gt;=300 |   | . | =~, !~ | Regex equality pperators | No | /msg =~ \"^\\w*$\"/msg=~\"^\\w*$\" |   | . | ==, != | Equality operators | No | /status == 200/status_code==200 |   | . | and, or, not | Conditional operators | Yes | /a&lt;300 and /b&gt;200 | /b&lt;300and/b&gt;200 | . | , | Set value delimiter | No | /a in {200, 202}/a in {200,202}/a in {200 , 202} | /a in {200,} | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/expression-syntax/#white-space",
+    "relUrl": "/pipelines/expression-syntax/#white-space"
+  },"38": {
+    "doc": "file sink",
+    "title": "file sink",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sinks/file/",
+    "relUrl": "/pipelines/configuration/sinks/file/"
+  },"39": {
+    "doc": "file sink",
+    "title": "Overview",
+    "content": "You can use the file sink to create a flat file output. The following table describes options you can configure for the file sink. | Option | Required | Type | Description | . | path | Yes | String | Path for the output file (e.g. logs/my-transformed-log.log). | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sinks/file/#overview",
+    "relUrl": "/pipelines/configuration/sinks/file/#overview"
+  },"40": {
+    "doc": "Getting started",
+    "title": "Getting started with Data Prepper",
+    "content": "Data Prepper is an independent component, not an OpenSearch plugin, that converts data for use with OpenSearch. It’s not bundled with the all-in-one OpenSearch installation packages. If you are migrating from Open Distro Data Prepper, see Migrating from Open Distro. ",
+    "url": "https://naarcha-aws.github.io/getting-started/#getting-started-with-data-prepper",
+    "relUrl": "/getting-started/#getting-started-with-data-prepper"
+  },"41": {
+    "doc": "Getting started",
+    "title": "1. Installing Data Prepper",
+    "content": "There are two ways to install Data Prepper: you can run the Docker image or build from source. The easiest way to use Data Prepper is by running the Docker image. We suggest that you use this approach if you have Docker available. Run the following command: . docker pull opensearchproject/data-prepper:latest . copy . If you have special requirements that require you to build from source, or if you want to contribute, see the Developer Guide. ",
+    "url": "https://naarcha-aws.github.io/getting-started/#1-installing-data-prepper",
+    "relUrl": "/getting-started/#1-installing-data-prepper"
+  },"42": {
+    "doc": "Getting started",
+    "title": "2. Configuring Data Prepper",
+    "content": "Two configuration files are required to run a Data Prepper instance. Optionally, you can configure a Log4j 2 configuration file. See Configuring Log4j for more information. The following list describes the purpose of each configuration file: . | pipelines.yaml: This file describes which data pipelines to run, including sources, processors, and sinks. | data-prepper-config.yaml: This file contains Data Prepper server settings that allow you to interact with exposed Data Prepper server APIs. | log4j2-rolling.properties (optional): This file contains Log4j 2 configuration options and can be a JSON, YAML, XML, or .properties file type. | . For Data Prepper versions earlier than 2.0, the .jar file expects the pipeline configuration file path to be followed by the server configuration file path. See the following configuration path example: . java -jar data-prepper-core-$VERSION.jar pipelines.yaml data-prepper-config.yaml . Optionally, you can add \"-Dlog4j.configurationFile=config/log4j2.properties\" to the command to pass a custom Log4j 2 configuration file. If you don’t provide a properties file, Data Prepper defaults to the log4j2.properties file in the shared-config directory. Starting with Data Prepper 2.0, you can launch Data Prepper by using the following data-prepper script that does not require any additional command line arguments: . bin/data-prepper . Configuration files are read from specific subdirectories in the application’s home directory: . | pipelines/: Used for pipeline configurations. Pipeline configurations can be written in one or more YAML files. | config/data-prepper-config.yaml: Used for the Data Prepper server configuration. | . You can supply your own pipeline configuration file path followed by the server configuration file path. However, this method will not be supported in a future release. See the following example: . bin/data-prepper pipelines.yaml data-prepper-config.yaml . The Log4j 2 configuration file is read from the config/log4j2.properties file located in the application’s home directory. To configure Data Prepper, see the following information for each use case: . | Trace analytics: Learn how to collect trace data and customize a pipeline that ingests and transforms that data. | Log analytics: Learn how to set up Data Prepper for log observability. | . ",
+    "url": "https://naarcha-aws.github.io/getting-started/#2-configuring-data-prepper",
+    "relUrl": "/getting-started/#2-configuring-data-prepper"
+  },"43": {
+    "doc": "Getting started",
+    "title": "3. Defining a pipeline",
+    "content": "Create a Data Prepper pipeline file named pipelines.yaml using the following configuration: . simple-sample-pipeline: workers: 2 delay: \"5000\" source: random: sink: - stdout: . copy . ",
+    "url": "https://naarcha-aws.github.io/getting-started/#3-defining-a-pipeline",
+    "relUrl": "/getting-started/#3-defining-a-pipeline"
+  },"44": {
+    "doc": "Getting started",
+    "title": "4. Running Data Prepper",
+    "content": "Run the following command with your pipeline configuration YAML. docker run --name data-prepper \\ -v /${PWD}/pipelines.yaml:/usr/share/data-prepper/pipelines/pipelines.yaml \\ opensearchproject/data-prepper:latest . copy . The example pipeline configuration above demonstrates a simple pipeline with a source (random) sending data to a sink (stdout). For examples of more advanced pipeline configurations, see Pipelines. After starting Data Prepper, you should see log output and some UUIDs after a few seconds: . 2021-09-30T20:19:44,147 [main] INFO com.amazon.dataprepper.pipeline.server.DataPrepperServer - Data Prepper server running at :4900 2021-09-30T20:19:44,681 [random-source-pool-0] INFO com.amazon.dataprepper.plugins.source.RandomStringSource - Writing to buffer 2021-09-30T20:19:45,183 [random-source-pool-0] INFO com.amazon.dataprepper.plugins.source.RandomStringSource - Writing to buffer 2021-09-30T20:19:45,687 [random-source-pool-0] INFO com.amazon.dataprepper.plugins.source.RandomStringSource - Writing to buffer 2021-09-30T20:19:46,191 [random-source-pool-0] INFO com.amazon.dataprepper.plugins.source.RandomStringSource - Writing to buffer 2021-09-30T20:19:46,694 [random-source-pool-0] INFO com.amazon.dataprepper.plugins.source.RandomStringSource - Writing to buffer 2021-09-30T20:19:47,200 [random-source-pool-0] INFO com.amazon.dataprepper.plugins.source.RandomStringSource - Writing to buffer 2021-09-30T20:19:49,181 [simple-test-pipeline-processor-worker-1-thread-1] INFO com.amazon.dataprepper.pipeline.ProcessWorker - simple-test-pipeline Worker: Processing 6 records from buffer 07dc0d37-da2c-447e-a8df-64792095fb72 5ac9b10a-1d21-4306-851a-6fb12f797010 99040c79-e97b-4f1d-a70b-409286f2a671 5319a842-c028-4c17-a613-3ef101bd2bdd e51e700e-5cab-4f6d-879a-1c3235a77d18 b4ed2d7e-cf9c-4e9d-967c-b18e8af35c90 . The remainder of this page provides examples for running Data Prepper from the Docker image. If you built it from source, refer to the Developer Guide for more information. However you configure your pipeline, you’ll run Data Prepper the same way. You run the Docker image and modify both the pipelines.yaml and data-prepper-config.yaml files. For Data Prepper 2.0 or later, use this command: . docker run --name data-prepper -p 4900:4900 -v ${PWD}/pipelines.yaml:/usr/share/data-prepper/pipelines/pipelines.yaml -v ${PWD}/data-prepper-config.yaml:/usr/share/data-prepper/config/data-prepper-config.yaml opensearchproject/data-prepper:latest . copy . For Data Prepper versions earlier than 2.0, use this command: . docker run --name data-prepper -p 4900:4900 -v ${PWD}/pipelines.yaml:/usr/share/data-prepper/pipelines.yaml -v ${PWD}/data-prepper-config.yaml:/usr/share/data-prepper/data-prepper-config.yaml opensearchproject/data-prepper:1.x . copy . Once Data Prepper is running, it processes data until it is shut down. Once you are done, shut it down with the following command: . POST /shutdown . copy . Additional configurations . For Data Prepper 2.0 or later, the Log4j 2 configuration file is read from config/log4j2.properties in the application’s home directory. By default, it uses log4j2-rolling.properties in the shared-config directory. For Data Prepper 1.5 or earlier, optionally add \"-Dlog4j.configurationFile=config/log4j2.properties\" to the command if you want to pass a custom log4j2 properties file. If no properties file is provided, Data Prepper defaults to the log4j2.properties file in the shared-config directory. ",
+    "url": "https://naarcha-aws.github.io/getting-started/#4-running-data-prepper",
+    "relUrl": "/getting-started/#4-running-data-prepper"
+  },"45": {
+    "doc": "Getting started",
+    "title": "Next steps",
+    "content": "Trace analytics is an important Data Prepper use case. If you haven’t yet configured it, see Trace analytics. Log ingestion is also an important Data Prepper use case. To learn more, see Log analytics. To learn how to run Data Prepper with a Logstash configuration, see Migrating from Logstash. For information on how to monitor Data Prepper, see Monitoring. ",
+    "url": "https://naarcha-aws.github.io/getting-started/#next-steps",
+    "relUrl": "/getting-started/#next-steps"
+  },"46": {
+    "doc": "Getting started",
+    "title": "More examples",
+    "content": "For more examples of Data Prepper, see examples in the Data Prepper repo. ",
+    "url": "https://naarcha-aws.github.io/getting-started/#more-examples",
+    "relUrl": "/getting-started/#more-examples"
+  },"47": {
+    "doc": "Getting started",
+    "title": "Getting started",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/getting-started/",
+    "relUrl": "/getting-started/"
+  },"48": {
+    "doc": "grok",
+    "title": "grok",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/grok/",
+    "relUrl": "/pipelines/configuration/processors/grok/"
+  },"49": {
+    "doc": "grok",
+    "title": "Overview",
+    "content": "The Grok processor takes unstructured data and utilizes pattern matching to structure and extract important keys. The following table describes options you can use with the Grok processor to structure your data and make your data easier to query. | Option | Required | Type | Description | . | match | No | Map | Specifies which keys to match specific patterns against. Default value is an empty body. | . | keep_empty_captures | No | Boolean | Enables preserving null captures. Default value is false. | . | named_captures_only | No | Boolean | Specifies whether to keep only named captures. Default value is true. | . | break_on_match | No | Boolean | Specifies whether to match all patterns or stop once the first successful match is found. Default value is true. | . | keys_to_overwrite | No | List | Specifies which existing keys will be overwritten if there is a capture with the same key value. Default value is []. | . | pattern_definitions | No | Map | Allows for custom pattern use inline. Default value is an empty body. | . | patterns_directories | No | List | Specifies the path of directories that contain customer pattern files. Default value is an empty list. | . | pattern_files_glob | No | String | Specifies which pattern files to use from the directories specified for pattern_directories. Default value is *. | . | target_key | No | String | Specifies a parent-level key used to store all captures. Default value is null. | . | timeout_millis | No | Integer | The maximum amount of time during which matching occurs. Setting to 0 disables the timeout. Default value is 30,000. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/grok/#overview",
+    "relUrl": "/pipelines/configuration/processors/grok/#overview"
+  },"50": {
+    "doc": "grok",
+    "title": "Metrics",
+    "content": "The following table describes common Abstract processor metrics. | Metric name | Type | Description | . | recordsIn | Counter | Metric representing the ingress of records to a pipeline component. | . | recordsOut | Counter | Metric representing the egress of records from a pipeline component. | . | timeElapsed | Timer | Metric representing the time elapsed during execution of a pipeline component. | . The Grok processor includes the following custom metrics. Counter . | grokProcessingMismatch: Records the number of records that did not match any of the patterns specified in the match field. | grokProcessingMatch: Records the number of records that matched at least one pattern from the match field. | grokProcessingErrors: Records the total number of record processing errors. | grokProcessingTimeouts: Records the total number of records that timed out while matching. | . Timer . | grokProcessingTime: The time taken by individual records to match against patterns from match. The avg metric is the most useful metric for this timer because it provides you with an average value of the time it takes records to match. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/grok/#metrics",
+    "relUrl": "/pipelines/configuration/processors/grok/#metrics"
+  },"51": {
+    "doc": "http_source",
+    "title": "http_source",
+    "content": "http_source is a source plugin that supports HTTP. Currently, http_source only supports the JSON UTF-8 codec for incoming requests, such as [{\"key1\": \"value1\"}, {\"key2\": \"value2\"}]. The following table describes options you can use to configure the http_source source. | Option | Required | Type | Description | . | port | No | Integer | The port that the source is running on. Default value is 2021. Valid options are between 0 and 65535. | . | health_check_service | No | Boolean | Enables the health check service on the /health endpoint on the defined port. Default value is false. | . | unauthenticated_health_check | No | Boolean | Determines whether or not authentication is required on the health check endpoint. Data Prepper ignores this option if no authentication is defined. Default value is false. | . | request_timeout | No | Integer | The request timeout, in milliseconds. Default value is 10000. | . | thread_count | No | Integer | The number of threads to keep in the ScheduledThreadPool. Default value is 200. | . | max_connection_count | No | Integer | The maximum allowed number of open connections. Default value is 500. | . | max_pending_requests | No | Integer | The maximum allowed number of tasks in the ScheduledThreadPool work queue. Default value is 1024. | . | authentication | No | Object | An authentication configuration. By default, this creates an unauthenticated server for the pipeline. This uses pluggable authentication for HTTPS. To use basic authentication define the http_basic plugin with a username and password. To provide customer authentication, use or create a plugin that implements ArmeriaHttpAuthenticationProvider. | . | ssl | No | Boolean | Enables TLS/SSL. Default value is false. | . | ssl_certificate_file | Conditionally | String | SSL certificate chain file path or Amazon Simple Storage Service (Amazon S3) path. Amazon S3 path example s3://&lt;bucketName&gt;/&lt;path&gt;. Required if ssl is set to true and use_acm_certificate_for_ssl is set to false. | . | ssl_key_file | Conditionally | String | SSL key file path or Amazon S3 path. Amazon S3 path example s3://&lt;bucketName&gt;/&lt;path&gt;. Required if ssl is set to true and use_acm_certificate_for_ssl is set to false. | . | use_acm_certificate_for_ssl | No | Boolean | Enables a TLS/SSL using certificate and private key from AWS Certificate Manager (ACM). Default value is false. | . | acm_certificate_arn | Conditionally | String | The ACM certificate Amazon Resource Name (ARN). The ACM certificate takes preference over Amazon S3 or a local file system certificate. Required if use_acm_certificate_for_ssl is set to true. | . | acm_private_key_password | No | String | ACM private key password that decrypts the private key. If not provided, Data Prepper generates a random password. | . | acm_certificate_timeout_millis | No | Integer | Timeout, in milliseconds, that ACM takes to get certificates. Default value is 120000. | . | aws_region | Conditionally | String | AWS region used by ACM or Amazon S3. Required if use_acm_certificate_for_ssl is set to true or ssl_certificate_file and ssl_key_file is the Amazon S3 path. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sources/http-source/",
+    "relUrl": "/pipelines/configuration/sources/http-source/"
+  },"52": {
+    "doc": "http_source",
+    "title": "Metrics",
+    "content": "The http_source source includes the following metrics. Counters . | requestsReceived: Measures the total number of requests received by the /log/ingest endpoint. | requestsRejected: Measures the total number of requests rejected (429 response status code) by the HTTP Source plugin. | successRequests: Measures the total number of requests successfully processed (200 response status code) the by HTTP Source plugin. | badRequests: Measures the total number of requests with either an invalid content type or format processed by the HTTP Source plugin (400 response status code). | requestTimeouts: Measures the total number of requests that time out in the HTTP source server (415 response status code). | requestsTooLarge: Measures the total number of requests where the size of the event is larger than the buffer capacity (413 response status code). | internalServerError: Measures the total number of requests processed by the HTTP Source with a custom exception type (500 response status code). | . Timers . | requestProcessDuration: Measures the latency of requests processed by the HTTP Source plugin in seconds. | . Distribution summaries . | payloadSize: Measures the incoming request payload size in bytes. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sources/http-source/#metrics",
+    "relUrl": "/pipelines/configuration/sources/http-source/#metrics"
+  },"53": {
+    "doc": "Data Prepper",
+    "title": "Data Prepper",
+    "content": "Data Prepper is a server-side data collector capable of filtering, enriching, transforming, normalizing, and aggregating data for downstream analytics and visualization. Data Prepper lets users build custom pipelines to improve the operational view of applications. Two common uses for Data Prepper are trace and log analytics. Trace analytics can help you visualize the flow of events and identify performance problems, and log analytics can improve searching, analyzing and provide insights into your application. ",
+    "url": "https://naarcha-aws.github.io/",
+    "relUrl": "/"
+  },"54": {
+    "doc": "Data Prepper",
+    "title": "Concepts",
+    "content": "Data Prepper includes one or more pipelines that collect and filter data based on the components set within the pipeline. Each component is pluggable, enabling you to use your own custom implementation of each component. These components include the following: . | One source | One or more sinks | (Optional) One buffer | (Optional) One or more processors | . A single instance of Data Prepper can have one or more pipelines. Each pipeline definition contains two required components: source and sink. If buffers and processors are missing from the Data Prepper pipeline, Data Prepper uses the default buffer and a no-op processor. Source . Source is the input component that defines the mechanism through which a Data Prepper pipeline will consume events. A pipeline can have only one source. The source can consume events either by receiving the events over HTTP or HTTPS or by reading from external endpoints like OTeL Collector for traces and metrics and Amazon Simple Storage Service (Amazon S3). Sources have their own configuration options based on the format of the events (such as string, JSON, Amazon CloudWatch logs, or open telemetry trace). The source component consumes events and writes them to the buffer component. Buffer . The buffer component acts as the layer between the source and the sink. Buffer can be either in-memory or disk based. The default buffer uses an in-memory queue called bounded_blocking that is bounded by the number of events. If the buffer component is not explicitly mentioned in the pipeline configuration, Data Prepper uses the default bounded_blocking. Sink . Sink is the output component that defines the destination(s) to which a Data Prepper pipeline publishes events. A sink destination could be a service, such as OpenSearch or Amazon S3, or another Data Prepper pipeline. When using another Data Prepper pipeline as the sink, you can chain multiple pipelines together based on the needs of the data. Sink contains its own configuration options based on the destination type. Processor . Processors are units within the Data Prepper pipeline that can filter, transform, and enrich events using your desired format before publishing the record to the sink component. The processor is not defined in the pipeline configuration; the events publish in the format defined in the source component. You can have more than one processor within a pipeline. When using multiple processors, the processors are run in the order they are defined inside the pipeline specification. ",
+    "url": "https://naarcha-aws.github.io/#concepts",
+    "relUrl": "/#concepts"
+  },"55": {
+    "doc": "Data Prepper",
+    "title": "Sample pipeline configurations",
+    "content": "To understand how all pipeline components function within a Data Prepper configuration, see the following examples. Each pipeline configuration uses a yaml file format. Minimal component . This pipeline configuration reads from the file source and writes to another file in the same path. It uses the default options for the buffer and processor. sample-pipeline: source: file: path: &lt;path/to/input-file&gt; sink: - file: path: &lt;path/to/output-file&gt; . All components . The following pipeline uses a source that reads string events from the input-file. The source then pushes the data to the buffer, bounded by a max size of 1024. The pipeline is configured to have 4 workers, each of them reading a maximum of 256 events from the buffer for every 100 milliseconds. Each worker runs the string_converter processor and writes the output of the processor to the output-file. sample-pipeline: workers: 4 #Number of workers delay: 100 # in milliseconds, how often the workers should run source: file: path: &lt;path/to/input-file&gt; buffer: bounded_blocking: buffer_size: 1024 # max number of events the buffer will accept batch_size: 256 # max number of events the buffer will drain for each read processor: - string_converter: upper_case: true sink: - file: path: &lt;path/to/output-file&gt; . ",
+    "url": "https://naarcha-aws.github.io/#sample-pipeline-configurations",
+    "relUrl": "/#sample-pipeline-configurations"
+  },"56": {
+    "doc": "Data Prepper",
+    "title": "Next steps",
+    "content": "To get started building your own custom pipelines with Data Prepper, see Getting started. ",
+    "url": "https://naarcha-aws.github.io/#next-steps",
+    "relUrl": "/#next-steps"
+  },"57": {
+    "doc": "key_value",
+    "title": "key_value",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/key-value/",
+    "relUrl": "/pipelines/configuration/processors/key-value/"
+  },"58": {
+    "doc": "key_value",
+    "title": "Overview",
+    "content": "The key_value processor parses a field into key/value pairs. The following table describes key_value processor options available that help you parse field information into pairs. | Option | Required | Type | Description | . | source | No | String | The key in the event that is parsed. Default value is message. | . | destination | No | String | The destination key for the parsed source output. Outputting the parsed source overwrites the value of the key if it already exists. Default value is parsed_message | . | field_delimiter_regex | Conditionally | String | A regex specifying the delimiter between key/value pairs. Special regex characters such as [ and ] must be escaped using \\\\. This option cannot be defined at the same time as field_split_characters. | . | field_split_characters | Conditionally | String | A string of characters to split between key/value pairs. Special regex characters such as [ and ] must be escaped using \\\\. Default value is &amp;. This option cannot be defined at the same time as field_delimiter_regex. | . | key_value_delimiter_regex | Conditionally | String | A regex specifying the delimiter between a key and a value. Special regex characters such as [ and ] must be escaped using \\\\. There is no default value. This option cannot be defined at the same time as value_split_characters. | . | value_split_characters | Conditionally | String | A string of characters to split between keys and values. Special regex characters such as [ and ] must be escaped using \\\\. Default value is =. This option cannot be defined at the same time as key_value_delimiter_regex. | . | non_match_value | No | String | When a key/value cannot be successfully split, the key/value is placed in the key field, and the specified value is placed in the value field. Default value is null. | . | prefix | No | String | A prefix given to all keys. Default value is empty string. | . | delete_key_regex | No | String | A regex used to delete characters from the key. Special regex characters such as [ and ] must be escaped using \\\\. There is no default value. | . | delete_value_regex | No | String | A regex used to delete characters from the value. Special regex characters such as [ and ] must be escaped using \\\\. There is no default value. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/key-value/#overview",
+    "relUrl": "/pipelines/configuration/processors/key-value/#overview"
+  },"59": {
+    "doc": "Log analytics",
+    "title": "Log analytics",
+    "content": "Data Prepper is an extendable, configurable, and scalable solution for log ingestion into OpenSearch and Amazon OpenSearch Service. Data Prepper supports receiving logs from Fluent Bit through the HTTP Source and processing those logs with a Grok Processor before ingesting them into OpenSearch through the OpenSearch sink. The following image shows all of the components used for log analytics with Fluent Bit, Data Prepper, and OpenSearch. In the application environment, run Fluent Bit. Fluent Bit can be containerized through Kubernetes, Docker, or Amazon Elastic Container Service (Amazon ECS). You can also run Fluent Bit as an agent on Amazon Elastic Compute Cloud (Amazon EC2). Configure the Fluent Bit http output plugin to export log data to Data Prepper. Then deploy Data Prepper as an intermediate component and configure it to send the enriched log data to your OpenSearch cluster. From there, use OpenSearch Dashboards to perform more intensive visualization and analysis. ",
+    "url": "https://naarcha-aws.github.io/common-use-cases/log-analytics/",
+    "relUrl": "/common-use-cases/log-analytics/"
+  },"60": {
+    "doc": "Log analytics",
+    "title": "Log analytics pipeline",
+    "content": "Log analytics pipelines in Data Prepper are extremely customizable. The following image shows a simple pipeline. HTTP source . The HTTP Source accepts log data from Fluent Bit. This source accepts log data in a JSON array format and supports industry-standard encryption in the form of TLS/HTTPS and HTTP basic authentication. Processor . Data Prepper 1.2 and above come with a Grok Processor. The Grok Processor is an invaluable tool for structuring and extracting important fields from your logs, making them more queryable. The Grok Processor comes with a wide variety of default patterns that match common log formats like Apache logs or syslogs, but it can easily accept any custom patterns that cater to your specific log format. For more information about Grok features, see the documentation. Sink . There is a generic sink that writes data to OpenSearch as the destination. The OpenSearch sink has configuration options related to an OpenSearch cluster, like endpoint, SSL/username, index name, index template, and index state management. ",
+    "url": "https://naarcha-aws.github.io/common-use-cases/log-analytics/#log-analytics-pipeline",
+    "relUrl": "/common-use-cases/log-analytics/#log-analytics-pipeline"
+  },"61": {
+    "doc": "Log analytics",
+    "title": "Pipeline configuration",
+    "content": "The following sections discuss pipeline configuration. Example pipeline with SSL and basic authentication enabled . This example pipeline configuration comes with SSL and basic authentication enabled for the http-source: . log-pipeline: source: http: ssl_certificate_file: \"/full/path/to/certfile.crt\" ssl_key_file: \"/full/path/to/keyfile.key\" authentication: http_basic: username: \"myuser\" password: \"mys3cret\" processor: - grok: match: # This will match logs with a \"log\" key against the COMMONAPACHELOG pattern (ex: { \"log\": \"actual apache log...\" } ) # You should change this to match what your logs look like. See the grok documenation to get started. log: [ \"%{COMMONAPACHELOG}\" ] sink: - opensearch: hosts: [ \"https://localhost:9200\" ] # Change to your credentials username: \"admin\" password: \"admin\" # Add a certificate file if you are accessing an OpenSearch cluster with a self-signed certificate #cert: /path/to/cert # If you are connecting to an Amazon OpenSearch Service domain without # Fine-Grained Access Control, enable these settings. Comment out the # username and password above. #aws_sigv4: true #aws_region: us-east-1 # Since we are grok matching for apache logs, it makes sense to send them to an OpenSearch index named apache_logs. # You should change this to correspond with how your OpenSearch indexes are set up. index: apache_logs . This pipeline configuration is an example of Apache log ingestion. Don’t forget that you can easily configure the Grok Processor for your own custom logs. You will need to modify the configuration for your OpenSearch cluster. The following are the main changes you need to make: . | hosts – Set to your hosts. | index – Change this to the OpenSearch index to which you want to send logs. | username – Provide your OpenSearch username. | password – Provide your OpenSearch password. | aws_sigv4 – If you use Amazon OpenSearch Service with AWS signing, set this to true. It will sign requests with the default AWS credentials provider. | aws_region – If you use Amazon OpenSearch Service with AWS signing, set this value to the AWS Region in which your cluster is hosted. | . ",
+    "url": "https://naarcha-aws.github.io/common-use-cases/log-analytics/#pipeline-configuration",
+    "relUrl": "/common-use-cases/log-analytics/#pipeline-configuration"
+  },"62": {
+    "doc": "Log analytics",
+    "title": "Fluent Bit",
+    "content": "You will need to run Fluent Bit in your service environment. See Getting Started with Fluent Bit for installation instructions. Ensure that you can configure the Fluent Bit http output plugin to your Data Prepper HTTP source. The following is an example fluent-bit.conf that tails a log file named test.log and forwards it to a locally running Data Prepper HTTP source, which runs by default on port 2021. Note that you should adjust the file path, output Host, and Port according to how and where you have Fluent Bit and Data Prepper running. Example: Fluent Bit file without SSL and basic authentication enabled . The following is an example fluent-bit.conf file without SSL and basic authentication enabled on the HTTP source: . [INPUT] name tail refresh_interval 5 path test.log read_from_head true [OUTPUT] Name http Match * Host localhost Port 2021 URI /log/ingest Format json . If your HTTP source has SSL and basic authentication enabled, you will need to add the details of http_User, http_Passwd, tls.crt_file, and tls.key_file to the fluent-bit.conf file, as shown in the following example. Example: Fluent Bit file with SSL and basic authentication enabled . The following is an example fluent-bit.conf file with SSL and basic authentication enabled on the HTTP source: . [INPUT] name tail refresh_interval 5 path test.log read_from_head true [OUTPUT] Name http Match * Host localhost http_User myuser http_Passwd mys3cret tls On tls.crt_file /full/path/to/certfile.crt tls.key_file /full/path/to/keyfile.key Port 2021 URI /log/ingest Format json . ",
+    "url": "https://naarcha-aws.github.io/common-use-cases/log-analytics/#fluent-bit",
+    "relUrl": "/common-use-cases/log-analytics/#fluent-bit"
+  },"63": {
+    "doc": "Log analytics",
+    "title": "Next steps",
+    "content": "See the Data Prepper Log Ingestion Demo Guide for a specific example of Apache log ingestion from FluentBit -&gt; Data Prepper -&gt; OpenSearch running through Docker. In the future, Data Prepper will offer additional sources and processors that will make more complex log analytics pipelines available. Check out the Data Prepper Project Roadmap to see what is coming. If there is a specific source, processor, or sink that you would like to include in your log analytics workflow and is not currently on the roadmap, please bring it to our attention by creating a GitHub issue. Additionally, if you are interested in contributing to Data Prepper, see our Contributing Guidelines as well as our developer guide and plugin development guide. ",
+    "url": "https://naarcha-aws.github.io/common-use-cases/log-analytics/#next-steps",
+    "relUrl": "/common-use-cases/log-analytics/#next-steps"
+  },"64": {
+    "doc": "lowercase_string",
+    "title": "lowercase_string",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/lowercase-string/",
+    "relUrl": "/pipelines/configuration/processors/lowercase-string/"
+  },"65": {
+    "doc": "lowercase_string",
+    "title": "Overview",
+    "content": "The lowercase_string processor converts a string to its lowercase counterpart and is a mutate string processor. The following table describes options for configuring the lowercase_string processor to convert strings to a lowercase format. | Option | Required | Type | Description | . | with_keys | Yes | List | A list of keys to convert to lowercase. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/lowercase-string/#overview",
+    "relUrl": "/pipelines/configuration/processors/lowercase-string/#overview"
+  },"66": {
+    "doc": "Managing Data Prepper",
+    "title": "Managing Data Prepper",
+    "content": "You can perform administrator functions for Data Prepper, including system configuration, interacting with core APIs, Log4j configuration, and monitoring. You can set up peer forwarding to coordinate multiple Data Prepper nodes when using stateful aggregation. ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/managing-data-prepper/",
+    "relUrl": "/managing-data-prepper/managing-data-prepper/"
+  },"67": {
+    "doc": "Migrating from Open Distro",
+    "title": "Migrating from Open Distro",
+    "content": "Existing users can migrate from the Open Distro Data Prepper to OpenSearch Data Prepper. Beginning with Data Prepper version 1.1, there is only one distribution of OpenSearch Data Prepper. ",
+    "url": "https://naarcha-aws.github.io/migrate-open-distro/",
+    "relUrl": "/migrate-open-distro/"
+  },"68": {
+    "doc": "Migrating from Open Distro",
+    "title": "Change your pipeline configuration",
+    "content": "The elasticsearch sink has changed to opensearch. Therefore, change your existing pipeline to use the opensearch plugin instead of elasticsearch. While the Data Prepper plugin is titled opensearch, it remains compatible with Open Distro and ElasticSearch 7.x. ",
+    "url": "https://naarcha-aws.github.io/migrate-open-distro/#change-your-pipeline-configuration",
+    "relUrl": "/migrate-open-distro/#change-your-pipeline-configuration"
+  },"69": {
+    "doc": "Migrating from Open Distro",
+    "title": "Update Docker image",
+    "content": "In your Data Prepper Docker configuration, adjust amazon/opendistro-for-elasticsearch-data-prepper to opensearchproject/data-prepper. This change will download the latest Data Prepper Docker image. ",
+    "url": "https://naarcha-aws.github.io/migrate-open-distro/#update-docker-image",
+    "relUrl": "/migrate-open-distro/#update-docker-image"
+  },"70": {
+    "doc": "Migrating from Open Distro",
+    "title": "Next steps",
+    "content": "For more information about Data Prepper configurations, see Getting Started with Data Prepper. ",
+    "url": "https://naarcha-aws.github.io/migrate-open-distro/#next-steps",
+    "relUrl": "/migrate-open-distro/#next-steps"
+  },"71": {
+    "doc": "Migrating from Logstash",
+    "title": "Migrating from Logstash",
+    "content": "You can run Data Prepper with a Logstash configuration. As mentioned in Getting started with Data Prepper, you’ll need to configure Data Prepper with a pipeline using a pipelines.yaml file. Alternatively, if you have a Logstash configuration logstash.conf to configure Data Prepper instead of pipelines.yaml. ",
+    "url": "https://naarcha-aws.github.io/migrating-from-logstash-data-prepper/",
+    "relUrl": "/migrating-from-logstash-data-prepper/"
+  },"72": {
+    "doc": "Migrating from Logstash",
+    "title": "Supported plugins",
+    "content": "As of the Data Prepper 1.2 release, the following plugins from the Logstash configuration are supported: . | HTTP Input plugin | Grok Filter plugin | Elasticsearch Output plugin | Amazon Elasticsearch Output plugin | . ",
+    "url": "https://naarcha-aws.github.io/migrating-from-logstash-data-prepper/#supported-plugins",
+    "relUrl": "/migrating-from-logstash-data-prepper/#supported-plugins"
+  },"73": {
+    "doc": "Migrating from Logstash",
+    "title": "Limitations",
+    "content": ". | Apart from the supported plugins, all other plugins from the Logstash configuration will throw an Exception and fail to run. | Conditionals in the Logstash configuration are not supported as of the Data Prepper 1.2 release. | . ",
+    "url": "https://naarcha-aws.github.io/migrating-from-logstash-data-prepper/#limitations",
+    "relUrl": "/migrating-from-logstash-data-prepper/#limitations"
+  },"74": {
+    "doc": "Migrating from Logstash",
+    "title": "Running Data Prepper with a Logstash configuration",
+    "content": ". | To install Data Prepper’s Docker image, see Installing Data Prepper in Getting Started with Data Prepper. | Run the Docker image installed in Step 1 by supplying your logstash.conf configuration. | . docker run --name data-prepper -p 4900:4900 -v ${PWD}/logstash.conf:/usr/share/data-prepper/pipelines.conf opensearchproject/data-prepper:latest pipelines.conf . The logstash.conf file is converted to logstash.yaml by mapping the plugins and attributes in the Logstash configuration to the corresponding plugins and attributes in Data Prepper. You can find the converted logstash.yaml file in the same directory where you stored logstash.conf. The following output in your terminal indicates that Data Prepper is running correctly: . INFO org.opensearch.dataprepper.pipeline.ProcessWorker - log-pipeline Worker: No records received from buffer . ",
+    "url": "https://naarcha-aws.github.io/migrating-from-logstash-data-prepper/#running-data-prepper-with-a-logstash-configuration",
+    "relUrl": "/migrating-from-logstash-data-prepper/#running-data-prepper-with-a-logstash-configuration"
+  },"75": {
+    "doc": "Monitoring",
+    "title": "Monitoring Data Prepper with metrics",
+    "content": "You can monitor Data Prepper with metrics using Micrometer. There are two types of metrics: JVM/system metrics and plugin metrics. Prometheus is used as the default metrics backend. ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/monitoring/#monitoring-data-prepper-with-metrics",
+    "relUrl": "/managing-data-prepper/monitoring/#monitoring-data-prepper-with-metrics"
+  },"76": {
+    "doc": "Monitoring",
+    "title": "JVM and system metrics",
+    "content": "JVM and system metrics are runtime metrics that are used to monitor Data Prepper instances. They include metrics for classloaders, memory, garbage collection, threads, and others. For more information, see JVM and system metrics. Naming . JVM and system metrics follow predefined names in Micrometer. For example, the Micrometer metrics name for memory usage is jvm.memory.used. Micrometer changes the name to match the metrics system. Following the same example, jvm.memory.used is reported to Prometheus as jvm_memory_used, and is reported to Amazon CloudWatch as jvm.memory.used.value. Serving . By default, metrics are served from the /metrics/sys endpoint on the Data Prepper server in Prometheus scrape format. You can configure Prometheus to scrape from the Data Prepper URL. Prometheus then polls Data Prepper for metrics and stores them in its database. To visualize the data, you can set up any frontend that accepts Prometheus metrics, such as Grafana. You can update the configuration to serve metrics to other registries like Amazon CloudWatch, which does not require or host the endpoint but publishes the metrics directly to CloudWatch. ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/monitoring/#jvm-and-system-metrics",
+    "relUrl": "/managing-data-prepper/monitoring/#jvm-and-system-metrics"
+  },"77": {
+    "doc": "Monitoring",
+    "title": "Plugin metrics",
+    "content": "Plugins report their own metrics. Data Prepper uses a naming convention to help with consistency in the metrics. Plugin metrics do not use dimensions. | AbstractBuffer . | Counter . | recordsWritten: The number of records written into a buffer | recordsRead: The number of records read from a buffer | recordsProcessed: The number of records read from a buffer and marked as processed | writeTimeouts: The count of write timeouts in a buffer | . | Gaugefir . | recordsInBuffer: The number of records in a buffer | recordsInFlight: The number of records read from a buffer and being processed by data-prepper downstreams (for example, processor, sink) | . | Timer . | readTimeElapsed: The time elapsed while reading from a buffer | checkpointTimeElapsed: The time elapsed while checkpointing | . | . | AbstractProcessor . | Counter . | recordsIn: The number of records ingressed into a processor | recordsOut: The number of records egressed from a processor | . | Timer . | timeElapsed: The time elapsed during initiation of a processor | . | . | AbstractSink . | Counter . | recordsIn: The number of records ingressed into a sink | . | Timer . | timeElapsed: The time elapsed during execution of a sink | . | . | . Naming . Metrics follow a naming convention of PIPELINE_NAME_PLUGIN_NAME_METRIC_NAME. For example, a recordsIn metric for the opensearch-sink plugin in a pipeline named output-pipeline has a qualified name of output-pipeline_opensearch_sink_recordsIn. Serving . By default, metrics are served from the /metrics/sys endpoint on the Data Prepper server in a Prometheus scrape format. You can configure Prometheus to scrape from the Data Prepper URL. The Data Prepper server port has a default value of 4900 that you can modify, and this port can be used for any frontend that accepts Prometheus metrics, such as Grafana. You can update the configuration to serve metrics to other registries like CloudWatch, that does not require or host the endpoint, but publishes the metrics directly to CloudWatch. ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/monitoring/#plugin-metrics",
+    "relUrl": "/managing-data-prepper/monitoring/#plugin-metrics"
+  },"78": {
+    "doc": "Monitoring",
+    "title": "Monitoring",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/monitoring/",
+    "relUrl": "/managing-data-prepper/monitoring/"
+  },"79": {
+    "doc": "Mutate string",
+    "title": "Mutate string processors",
+    "content": "You can change the way that a string appears by using a mutate string processesor. For example, you can use the uppercase_string processor to convert a string to uppercase, and you can use the lowercase_string processor to convert a string to lowercase. The following is a list of processors that allow you to mutate a string: . | substitute_string | split_string | uppercase_string | lowercase_string | trim_string | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/mutate-string/#mutate-string-processors",
+    "relUrl": "/pipelines/configuration/processors/mutate-string/#mutate-string-processors"
+  },"80": {
+    "doc": "Mutate string",
+    "title": "substitute_string",
+    "content": "The substitute_string processor matches a key’s value against a regular expression (regex) and replaces all returned matches with a replacement string. Configuration . You can configure the substitute_string processor with the following options. | Option | Required | Description | . | entries | Yes | A list of entries to add to an event. | . | source | Yes | The key to be modified. | . | from | Yes | The regex string to be replaced. Special regex characters such as [ and ] must be escaped using \\\\ when using double quotes and \\ when using single quotes. For more information, see Class Pattern in the Java documentation. | . | to | Yes | The string that replaces each match of from. | . Usage . To get started, create the following pipeline.yaml file: . pipeline: source: file: path: \"/full/path/to/logs_json.log\" record_type: \"event\" format: \"json\" processor: - substitute_string: entries: - source: \"message\" from: \":\" to: \"-\" sink: - stdout: . copy . Next, create a log file named logs_json.log. After that, replace the path of the file source in your pipeline.yaml file with your file path. For more detailed information, see Configuring Data Prepper. Before you run Data Prepper, the source appears in the following format: . {\"message\": \"ab:cd:ab:cd\"} . After you run Data Prepper, the source is converted to the following format: . {\"message\": \"ab-cd-ab-cd\"} . from defines which string is replaced, and to defines the string that replaces the from string. In the preceding example, string ab:cd:ab:cd becomes ab-cd-ab-cd. If the from regex string does not return a match, the key is returned without any changes. ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/mutate-string/#substitute_string",
+    "relUrl": "/pipelines/configuration/processors/mutate-string/#substitute_string"
+  },"81": {
+    "doc": "Mutate string",
+    "title": "split_string",
+    "content": "The split_string processor splits a field into an array using a delimiter character. Configuration . You can configure the split_string processor with the following options. | Option | Required | Description | . | entries | Yes | A list of entries to add to an event. | . | source | Yes | The key to be split. | . | delimiter | No | The separator character responsible for the split. Cannot be defined at the same time as delimiter_regex. At least delimiter or delimiter_regex must be defined. | . | delimiter_regex | No | A regex string responsible for the split. Cannot be defined at the same time as delimiter. Either delimiter or delimiter_regex must be defined. | . Usage . To get started, create the following pipeline.yaml file: . pipeline: source: file: path: \"/full/path/to/logs_json.log\" record_type: \"event\" format: \"json\" processor: - split_string: entries: - source: \"message\" delimiter: \",\" sink: - stdout: . copy . Next, create a log file named logs_json.log. After that, replace the path in the file source of your pipeline.yaml file with your file path. For more detailed information, see Configuring Data Prepper. Before you run Data Prepper, the source appears in the following format: . {\"message\": \"hello,world\"} . After you run Data Prepper, the source is converted to the following format: . {\"message\":[\"hello\",\"world\"]} . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/mutate-string/#split_string",
+    "relUrl": "/pipelines/configuration/processors/mutate-string/#split_string"
+  },"82": {
+    "doc": "Mutate string",
+    "title": "uppercase_string",
+    "content": "The uppercase_string processor converts the value (a string) of a key from its current case to uppercase. Configuration . You can configure the uppercase_string processor with the following options. | Option | Required | Description | . | with_keys | Yes | A list of keys to convert to uppercase. | . Usage . To get started, create the following pipeline.yaml file: . pipeline: source: file: path: \"/full/path/to/logs_json.log\" record_type: \"event\" format: \"json\" processor: - uppercase_string: with_keys: - \"uppercaseField\" sink: - stdout: . copy . Next, create a log file named logs_json.log. After that, replace the path in the file source of your pipeline.yaml file with the correct file path. For more detailed information, see Configuring Data Prepper. Before you run Data Prepper, the source appears in the following format: . {\"uppercaseField\": \"hello\"} . After you run Data Prepper, the source is converted to the following format: . {\"uppercaseField\": \"HELLO\"} . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/mutate-string/#uppercase_string",
+    "relUrl": "/pipelines/configuration/processors/mutate-string/#uppercase_string"
+  },"83": {
+    "doc": "Mutate string",
+    "title": "lowercase_string",
+    "content": "The lowercase string processor converts a string to lowercase. Configuration . You can configure the lowercase string processor with the following options. | Option | Required | Description | . | with_keys | Yes | A list of keys to convert to lowercase. | . Usage . To get started, create the following pipeline.yaml file: . pipeline: source: file: path: \"/full/path/to/logs_json.log\" record_type: \"event\" format: \"json\" processor: - lowercase_string: with_keys: - \"lowercaseField\" sink: - stdout: . copy . Next, create a log file named logs_json.log. After that, replace the path in the file source of your pipeline.yaml file with the correct file path. For more detailed information, see Configuring Data Prepper. Before you run Data Prepper, the source appears in the following format: . {\"lowercaseField\": \"TESTmeSSage\"} . After you run Data Prepper, the source is converted to the following format: . {\"lowercaseField\": \"testmessage\"} . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/mutate-string/#lowercase_string",
+    "relUrl": "/pipelines/configuration/processors/mutate-string/#lowercase_string"
+  },"84": {
+    "doc": "Mutate string",
+    "title": "trim_string",
+    "content": "The trim_string processor removes whitespace from the beginning and end of a key. Configuration . You can configure the trim_string processor with the following options. | Option | Required | Description | . | with_keys | Yes | A list of keys from which to trim the whitespace. | . Usage . To get started, create the following pipeline.yaml file: . pipeline: source: file: path: \"/full/path/to/logs_json.log\" record_type: \"event\" format: \"json\" processor: - trim_string: with_keys: - \"trimField\" sink: - stdout: . copy . Next, create a log file named logs_json.log. After that, replace the path in the file source of your pipeline.yaml file with the correct file path. For more detailed information, see Configuring Data Prepper. Before you run Data Prepper, the source appears in the following format: . {\"trimField\": \" Space Ship \"} . After you run Data Prepper, the source is converted to the following format: . {\"trimField\": \"Space Ship\"} . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/mutate-string/#trim_string",
+    "relUrl": "/pipelines/configuration/processors/mutate-string/#trim_string"
+  },"85": {
+    "doc": "Mutate string",
+    "title": "Mutate string",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/mutate-string/",
+    "relUrl": "/pipelines/configuration/processors/mutate-string/"
+  },"86": {
+    "doc": "OpenSearch sink",
+    "title": "OpenSearch sink",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sinks/opensearch/",
+    "relUrl": "/pipelines/configuration/sinks/opensearch/"
+  },"87": {
+    "doc": "OpenSearch sink",
+    "title": "Overview",
+    "content": "You can use the OpenSearch sink to send data to an OpenSearch, Amazon OpenSearch Service, or Elasticsearch cluster using the REST client. The following table describes options you can configure for the OpenSearch sink. | Option | Required | Type | Description | . | hosts | Yes | List | List of OpenSearch hosts to write to (for example, [\"https://localhost:9200\", \"https://remote-cluster:9200\"]). | . | cert | No | String | Path to the security certificate (for example, \"config/root-ca.pem\") if the cluster uses the OpenSearch security plugin. | . | username | No | String | Username for HTTP basic authentication. | . | password | No | String | Password for HTTP basic authentication. | . | aws_sigv4 | No | Boolean | Default value is false. Whether to use AWS Identity and Access Management (IAM) signing to connect to an Amazon OpenSearch Service domain. For your access key, secret key, and optional session token, Data Prepper uses the default credential chain (environment variables, Java system properties, ~/.aws/credential, etc.). | . | aws_region | No | String | The AWS region (for example, \"us-east-1\") for the domain if you are connecting to Amazon OpenSearch Service. | . | aws_sts_role_arn | No | String | IAM role that the Sink plugin uses to sign requests to Amazon OpenSearch Service. If this information is not provided, the plugin uses the default credentials. | . | socket_timeout | No | Integer | The timeout, in milliseconds, waiting for data to return (or the maximum period of inactivity between two consecutive data packets). A timeout value of zero is interpreted as an infinite timeout. If this timeout value is negative or not set, the underlying Apache HttpClient would rely on operating system settings for managing socket timeouts. | . | connect_timeout | No | Integer | The timeout in milliseconds used when requesting a connection from the connection manager. A timeout value of zero is interpreted as an infinite timeout. If this timeout value is negative or not set, the underlying Apache HttpClient would rely on operating system settings for managing connection timeouts. | . | insecure | No | Boolean | Whether or not to verify SSL certificates. If set to true, certificate authority (CA) certificate verification is disabled and insecure HTTP requests are sent instead. Default value is false. | . | proxy | No | String | The address of a forward HTTP proxy server. The format is “&lt;host name or IP&gt;:&lt;port&gt;”. Examples: “example.com:8100”, “http://example.com:8100”, “112.112.112.112:8100”. Port number cannot be omitted. | . | index | Conditionally | String | Name of the export index. Applicable and required only when the index_type is custom. | . | index_type | No | String | This index type tells the Sink plugin what type of data it is handling. Valid values: custom, trace-analytics-raw, trace-analytics-service-map, management-disabled. Default value is custom. | . | template_file | No | String | Path to a JSON index template file (for example, /your/local/template-file.json) if index_type is custom. See otel-v1-apm-span-index-template.json for an example. | . | document_id_field | No | String | The field from the source data to use for the OpenSearch document ID (for example, \"my-field\") if index_type is custom. | . | dlq_file | No | String | The path to your preferred dead letter queue file (for example, /your/local/dlq-file). Data Prepper writes to this file when it fails to index a document on the OpenSearch cluster. | . | bulk_size | No | Integer (long) | The maximum size (in MiB) of bulk requests sent to the OpenSearch cluster. Values below 0 indicate an unlimited size. If a single document exceeds the maximum bulk request size, Data Prepper sends it individually. Default value is 5. | . | ism_policy_file | No | String | The absolute file path for an ISM (Index State Management) policy JSON file. This policy file is effective only when there is no built-in policy file for the index type. For example, custom index type is currently the only one without a built-in policy file, thus it would use the policy file here if it’s provided through this parameter. For more information, see ISM policies. | . | number_of_shards | No | Integer | The number of primary shards that an index should have on the destination OpenSearch server. This parameter is effective only when template_file is either explicitly provided in Sink configuration or built-in. If this parameter is set, it would override the value in index template file. For more information, see Create index. | . | number_of_replicas | No | Integer | The number of replica shards each primary shard should have on the destination OpenSearch server. For example, if you have 4 primary shards and set number_of_replicas to 3, the index has 12 replica shards. This parameter is effective only when template_file is either explicitly provided in Sink configuration or built-in. If this parameter is set, it would override the value in index template file. For more information, see Create index. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sinks/opensearch/#overview",
+    "relUrl": "/pipelines/configuration/sinks/opensearch/#overview"
+  },"88": {
+    "doc": "otel_metrics_source",
+    "title": "otel_metrics_source",
+    "content": "otel_metrics_source is an OpenTelemetry Collector source that collects metric data. The following table describes options you can use to configure the otel_metrics_source source. | Option | Required | Type | Description | . | port | No | Integer | The port that the OpenTelemtry metrics source runs on. Default value is 21891. | . | request_timeout | No | Integer | The request timeout, in milliseconds. Default value is 10000. | . | health_check_service | No | Boolean | Enables a gRPC health check service under grpc.health.v1/Health/Check. Default value is false. | . | proto_reflection_service | No | Boolean | Enables a reflection service for Protobuf services (see gRPC reflection and gRPC Server Reflection Tutorial docs). Default value is false. | . | unframed_requests | No | Boolean | Enables requests not framed using the gRPC wire protocol. | . | thread_count | No | Integer | The number of threads to keep in the ScheduledThreadPool. Default value is 200. | . | max_connection_count | No | Integer | The maximum allowed number of open connections. Default value is 500. | . | ssl | No | Boolean | Enables connections to the OpenTelemetry source port over TLS/SSL. Default value is true. | . | sslKeyCertChainFile | Conditionally | String | File-system path or Amazon Simple Storage Service (Amazon S3) path to the security certificate (for example, \"config/demo-data-prepper.crt\" or \"s3://my-secrets-bucket/demo-data-prepper.crt\"). Required if ssl is set to true. | . | sslKeyFile | Conditionally | String | File-system path or Amazon S3 path to the security key (for example, \"config/demo-data-prepper.key\" or \"s3://my-secrets-bucket/demo-data-prepper.key\"). Required if ssl is set to true. | . | useAcmCertForSSL | No | Boolean | Whether to enable TLS/SSL using a certificate and private key from AWS Certificate Manager (ACM). Default value is false. | . | acmCertificateArn | Conditionally | String | Represents the ACM certificate ARN. ACM certificate take preference over S3 or local file system certificates. Required if useAcmCertForSSL is set to true. | . | awsRegion | Conditionally | String | Represents the AWS Region used by ACM or Amazon S3. Required if useAcmCertForSSL is set to true or sslKeyCertChainFile and sslKeyFile is the Amazon S3 path. | . | authentication | No | Object | An authentication configuration. By default, an unauthenticated server is created for the pipeline. This uses pluggable authentication for HTTPS. To use basic authentication, define the http_basic plugin with a username and password. To provide customer authentication, use or create a plugin that implements GrpcAuthenticationProvider. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sources/otel-metrics-source/",
+    "relUrl": "/pipelines/configuration/sources/otel-metrics-source/"
+  },"89": {
+    "doc": "otel_metrics_source",
+    "title": "Metrics",
+    "content": "The otel_metrics_source source includes the following metrics. Counters . | requestTimeouts: Measures the total number of requests that time out. | requestsReceived: Measures the total number of requests received by the OpenTelemetry metrics source. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sources/otel-metrics-source/#metrics",
+    "relUrl": "/pipelines/configuration/sources/otel-metrics-source/#metrics"
+  },"90": {
+    "doc": "otel_trace_raw",
+    "title": "otel_trace_raw",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/otel-trace-raw/",
+    "relUrl": "/pipelines/configuration/processors/otel-trace-raw/"
+  },"91": {
+    "doc": "otel_trace_raw",
+    "title": "Overview",
+    "content": "The otel_trace_raw processor completes trace-group-related fields in all incoming Data Prepper span records by state caching the root span information for each tradeId. This processor includes the following parameters. | traceGroup: Root span name | endTime: End time of the entire trace in International Organization for Standardization (ISO) 8601 format | durationInNanos: Duration of the entire trace in nanoseconds | statusCode: Status code for the entire trace in nanoseconds | . The following table describes the options you can use to configure the otel_trace_raw processor. | Option | Required | Type | Description | . | trace_flush_interval | No | Integer | Represents the time interval in seconds to flush all the descendant spans without any root span. Default is 180. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/otel-trace-raw/#overview",
+    "relUrl": "/pipelines/configuration/processors/otel-trace-raw/#overview"
+  },"92": {
+    "doc": "otel_trace_raw",
+    "title": "Metrics",
+    "content": "The following table describes common Abstract processor metrics. | Metric name | Type | Description | . | recordsIn | Counter | Metric representing the ingress of records to a pipeline component. | . | recordsOut | Counter | Metric representing the egress of records from a pipeline component. | . | timeElapsed | Timer | Metric representing the time elapsed during execution of a pipeline component. | . The otel_trace_raw processor includes the following custom metrics. | traceGroupCacheCount: The number of trace groups in the trace group cache. | spanSetCount: The number of span sets in the span set collection. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/otel-trace-raw/#metrics",
+    "relUrl": "/pipelines/configuration/processors/otel-trace-raw/#metrics"
+  },"93": {
+    "doc": "otel_trace_source source",
+    "title": "otel_trace source",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sources/otel-trace/#otel_trace-source",
+    "relUrl": "/pipelines/configuration/sources/otel-trace/#otel_trace-source"
+  },"94": {
+    "doc": "otel_trace_source source",
+    "title": "Overview",
+    "content": "The otel_trace source is a source for the OpenTelemetry Collector. The following table describes options you can use to configure the otel_trace source. | Option | Required | Type | Description | . | port | No | Integer | The port that the otel_trace source runs on. Default value is 21890. | . | request_timeout | No | Integer | The request timeout, in milliseconds. Default value is 10000. | . | health_check_service | No | Boolean | Enables a gRPC health check service under grpc.health.v1/Health/Check. Default value is false. | . | unauthenticated_health_check | No | Boolean | Determines whether or not authentication is required on the health check endpoint. Data Prepper ignores this option if no authentication is defined. Default value is false. | . | proto_reflection_service | No | Boolean | Enables a reflection service for Protobuf services (see gRPC reflection and gRPC Server Reflection Tutorial docs). Default value is false. | . | unframed_requests | No | Boolean | Enable requests not framed using the gRPC wire protocol. | . | thread_count | No | Integer | The number of threads to keep in the ScheduledThreadPool. Default value is 200. | . | max_connection_count | No | Integer | The maximum allowed number of open connections. Default value is 500. | . | ssl | No | Boolean | Enables connections to the OTel source port over TLS/SSL. Defaults to true. | . | sslKeyCertChainFile | Conditionally | String | File system path or Amazon Simple Storage Service (Amazon S3) path to the security certificate (for example, \"config/demo-data-prepper.crt\" or \"s3://my-secrets-bucket/demo-data-prepper.crt\"). Required if ssl is set to true. | . | sslKeyFile | Conditionally | String | File system path or Amazon S3 path to the security key (for example, \"config/demo-data-prepper.key\" or \"s3://my-secrets-bucket/demo-data-prepper.key\"). Required if ssl is set to true. | . | useAcmCertForSSL | No | Boolean | Whether to enable TLS/SSL using a certificate and private key from AWS Certificate Manager (ACM). Default value is false. | . | acmCertificateArn | Conditionally | String | Represents the ACM certificate ARN. ACM certificate take preference over S3 or local file system certificate. Required if useAcmCertForSSL is set to true. | . | awsRegion | Conditionally | String | Represents the AWS region used by ACM or Amazon S3. Required if useAcmCertForSSL is set to true or sslKeyCertChainFile and sslKeyFile are Amazon S3 paths. | . | authentication | No | Object | An authentication configuration. By default, an unauthenticated server is created for the pipeline. This parameter uses pluggable authentication for HTTPS. To use basic authentication, define the http_basic plugin with a username and password. To provide customer authentication, use or create a plugin that implements GrpcAuthenticationProvider. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sources/otel-trace/#overview",
+    "relUrl": "/pipelines/configuration/sources/otel-trace/#overview"
+  },"95": {
+    "doc": "otel_trace_source source",
+    "title": "Metrics",
+    "content": "Counters . | requestTimeouts: Measures the total number of requests that time out. | requestsReceived: Measures the total number of requests received by the otel_trace source. | successRequests: Measures the total number of requests successfully processed by the otel_trace source plugin. | badRequests: Measures the total number of requests with an invalid format processed by the otel_trace source plugin. | requestsTooLarge: Measures the total number of requests whose number of spans exceeds the buffer capacity. | internalServerError: Measures the total number of requests processed by the otel_trace source with a custom exception type. | . Timers . | requestProcessDuration: Measures the latency of requests processed by the otel_trace source plugin in seconds. | . Distribution summaries . | payloadSize: Measures the incoming request payload size distribution in bytes. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sources/otel-trace/#metrics",
+    "relUrl": "/pipelines/configuration/sources/otel-trace/#metrics"
+  },"96": {
+    "doc": "otel_trace_source source",
+    "title": "otel_trace_source source",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sources/otel-trace/",
+    "relUrl": "/pipelines/configuration/sources/otel-trace/"
+  },"97": {
+    "doc": "Parse JSON",
+    "title": "Parse JSON",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/parse-json/",
+    "relUrl": "/pipelines/configuration/processors/parse-json/"
+  },"98": {
+    "doc": "Parse JSON",
+    "title": "Overview",
+    "content": "The parse_json processor parses JSON data for an event, including any nested fields. The following table describes several optional parameters you can configure in the parse_json processor. | Option | Required | Type | Description | . | source | No | String | The field in the Event that will be parsed. Default value is message. | . | destination | No | String | The destination field of the parsed JSON. Defaults to the root of the Event. Cannot be \"\", /, or any whitespace-only String because these are not valid Event fields. | . | pointer | No | String | A JSON Pointer to the field to be parsed. There is no pointer by default, meaning the entire source is parsed. The pointer can access JSON Array indices as well. If the JSON Pointer is invalid then the entire source data is parsed into the outgoing Event. If the pointed-to key already exists in the Event and the destination is the root, then the pointer uses the entire path of the key. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/parse-json/#overview",
+    "relUrl": "/pipelines/configuration/processors/parse-json/#overview"
+  },"99": {
+    "doc": "Peer forwarder",
+    "title": "Peer forwarder",
+    "content": "Peer forwarder is an HTTP service that performs peer forwarding of an event between Data Prepper nodes for aggregation. This HTTP service uses a hash-ring approach to aggregate events and determine which Data Prepper node it should handle on a given trace before rerouting it to that node. Currently, peer forwarder is supported by the aggregate, service_map_stateful, and otel_trace_raw processors. Peer forwarder groups events based on the identification keys provided by the supported processors. For service_map_stateful and otel_trace_raw, the identification key is traceId by default and cannot be configured. The aggregate processor is configured using the identification_keys configuration option. From here, you can specify which keys to use for peer forwarder. See Aggregate Processor page for more information about identification keys. Peer discovery allows Data Prepper to find other nodes that it will communicate with. Currently, peer discovery is provided by a static list, a DNS record lookup, or AWS Cloud Map. ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/peer-forwarder/",
+    "relUrl": "/managing-data-prepper/peer-forwarder/"
+  },"100": {
+    "doc": "Peer forwarder",
+    "title": "Discovery modes",
+    "content": "The following sections provide information about discovery modes. Static . Static discovery mode allows a Data Prepper node to discover nodes using a list of IP addresses or domain names. See the following YAML file for an example of static discovery mode: . peer_forwarder:4 discovery_mode: static static_endpoints: [\"data-prepper1\", \"data-prepper2\"] . DNS lookup . DNS discovery is preferred over static discovery when scaling out a Data Prepper cluster. DNS discovery configures a DNS provider to return a list of Data Prepper hosts when given a single domain name. This list consists of a DNS A record, and a list of IP addresses of a given domain. See the following YAML file for an example of DNS lookup: . peer_forwarder: discovery_mode: dns domain_name: \"data-prepper-cluster.my-domain.net\" . AWS Cloud Map . AWS Cloud Map provides API-based service discovery as well as DNS-based service discovery. Peer forwarder can use the API-based service discovery in AWS Cloud Map. To support this, you must have an existing namespace configured for API instance discovery. You can create a new one by following the instructions provided by the AWS Cloud Map documentation. Your Data Prepper configuration needs to include the following: . | aws_cloud_map_namespace_name – Set to your AWS Cloud Map namespace name. | aws_cloud_map_service_name – Set to the service name within your specified namespace. | aws_region – Set to the AWS Region in which your namespace exists. | discovery_mode – Set to aws_cloud_map. | . Your Data Prepper configuration can optionally include the following: . | aws_cloud_map_query_parameters – Key-value pairs are used to filter the results based on the custom attributes attached to an instance. Results include only those instances that match all of the specified key-value pairs. | . Example configuration . See the following YAML file example of AWS Cloud Map configuration: . peer_forwarder: discovery_mode: aws_cloud_map aws_cloud_map_namespace_name: \"my-namespace\" aws_cloud_map_service_name: \"data-prepper-cluster\" aws_cloud_map_query_parameters: instance_type: \"r5.xlarge\" aws_region: \"us-east-1\" . IAM policy with necessary permissions . Data Prepper must also be running with the necessary permissions. The following AWS Identity and Access Management (IAM) policy shows the necessary permissions: . { \"Version\": \"2012-10-17\", \"Statement\": [ { \"Sid\": \"CloudMapPeerForwarder\", \"Effect\": \"Allow\", \"Action\": \"servicediscovery:DiscoverInstances\", \"Resource\": \"*\" } ] } . ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/peer-forwarder/#discovery-modes",
+    "relUrl": "/managing-data-prepper/peer-forwarder/#discovery-modes"
+  },"101": {
+    "doc": "Peer forwarder",
+    "title": "Configuration",
+    "content": "The following table provides optional configuration values. | Value | Type | Description | . | port | Integer | A value between 0 and 65535 that represents the port that the peer forwarder server is running on. Default value is 4994. | . | request_timeout | Integer | Represents the request timeout duration in milliseconds for the peer forwarder HTTP server. Default value is 10000. | . | server_thread_count | Integer | Represents the number of threads used by the peer forwarder server. Default value is 200. | . | client_thread_count | Integer | Represents the number of threads used by the peer forwarder client. Default value is 200. | . | maxConnectionCount | Integer | Represents the maximum number of open connections for the peer forwarder server. Default value is 500. | . | discovery_mode | String | Represents the peer discovery mode to be used. Allowable values are local_node, static, dns, and aws_cloud_map. Defaults to local_node, which processes events locally. | . | static_endpoints | List | Contains the endpoints of all Data Prepper instances. Required if discovery_mode is set to static. | . | domain_name | String | Represents the single domain name to query DNS against. Typically used by creating multiple DNS A records for the same domain. Required if discovery_mode is set to dns. | . | aws_cloud_map_namespace_name | String | Represents the AWS Cloud Map namespace when using AWS Cloud Map service discovery. Required if discovery_mode is set to aws_cloud_map. | . | aws_cloud_map_service_name | String | Represents the AWS Cloud Map service when using AWS Cloud Map service discovery. Required if discovery_mode is set to aws_cloud_map. | . | aws_cloud_map_query_parameters | Map | Key-value pairs used to filter the results based on the custom attributes attached to an instance. Only instances that match all the specified key-value pairs are returned. | . | buffer_size | Integer | Represents the maximum number of unchecked records the buffer accepts (the number of unchecked records equals the number of records written into the buffer plus the number of records that are still processing and not yet checked by the Checkpointing API). Default is 512. | . | batch_size | Integer | Represents the maximum number of records that the buffer returns on read. Default is 48. | . | aws_region | String | Represents the AWS Region that uses ACM, Amazon S3, or AWS Cloud Map and is required when any of the following conditions are met: - The use_acm_certificate_for_ssl setting is set to true. - Either ssl_certificate_file or ssl_key_file specifies an Amazon Simple Storage Service (Amazon S3) URI (for example, s3://mybucket/path/to/public.cert). - The discovery_mode is set to aws_cloud_map. | . | drain_timeout | Duration | Represents the amount of time that peer forwarder will wait to complete data processing before shutdown. | . ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/peer-forwarder/#configuration",
+    "relUrl": "/managing-data-prepper/peer-forwarder/#configuration"
+  },"102": {
+    "doc": "Peer forwarder",
+    "title": "SSL configuration",
+    "content": "The following table provides optional SSL configuration values that allow you to set up a trust manager for the peer forwarder client in order to connect to other Data Prepper instances. | Value | Type | Description | . | ssl | Boolean | Enables TLS/SSL. Default value is true. | . | ssl_certificate_file | String | Represents the SSL certificate chain file path or Amazon S3 path. The following is an example of an Amazon S3 path: s3://&lt;bucketName&gt;/&lt;path&gt;. Defaults to the default certificate file,config/default_certificate.pem. See Default Certificates for more information about how the certificate is generated. | . | ssl_key_file | String | Represents the SSL key file path or Amazon S3 path. Amazon S3 path example: s3://&lt;bucketName&gt;/&lt;path&gt;. Defaults to config/default_private_key.pem which is the default private key file. See Default Certificates for more information about how the private key file is generated. | . | ssl_insecure_disable_verification | Boolean | Disables the verification of the server’s TLS certificate chain. Default value is false. | . | ssl_fingerprint_verification_only | Boolean | Disables the verification of the server’s TLS certificate chain and instead verifies only the certificate fingerprint. Default value is false. | . | use_acm_certificate_for_ssl | Boolean | Enables TLS/SSL using the certificate and private key from AWS Certificate Manager (ACM). Default value is false. | . | acm_certificate_arn | String | Represents the ACM certificate Amazon Resource Name (ARN). The ACM certificate takes precedence over Amazon S3 or the local file system certificate. Required if use_acm_certificate_for_ssl is set to true. | . | acm_private_key_password | String | Represents the ACM private key password that will be used to decrypt the private key. If it’s not provided, a random password will be generated. | . | acm_certificate_timeout_millis | Integer | Represents the timeout in milliseconds required for ACM to get certificates. Default value is 120000. | . | aws_region | String | Represents the AWS Region that uses ACM, Amazon S3, or AWS Cloud Map. Required if use_acm_certificate_for_ssl is set to true or ssl_certificate_file. Also required when the ssl_key_file is set to use the Amazon S3 path or if discovery_mode is set to aws_cloud_map. | . Example configuration . The following YAML file provides an example configuration: . peer_forwarder: ssl: true ssl_certificate_file: \"&lt;cert-file-path&gt;\" ssl_key_file: \"&lt;private-key-file-path&gt;\" . ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/peer-forwarder/#ssl-configuration",
+    "relUrl": "/managing-data-prepper/peer-forwarder/#ssl-configuration"
+  },"103": {
+    "doc": "Peer forwarder",
+    "title": "Authentication",
+    "content": "Authentication is optional and is a Map that enables mutual TLS (mTLS). It can either be mutual_tls or unauthenticated. The default value is unauthenticated. The following YAML file provides an example of authentication: . peer_forwarder: authentication: mutual_tls: . ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/peer-forwarder/#authentication",
+    "relUrl": "/managing-data-prepper/peer-forwarder/#authentication"
+  },"104": {
+    "doc": "Peer forwarder",
+    "title": "Metrics",
+    "content": "Core peer forwarder introduces the following custom metrics. All the metrics are prefixed by core.peerForwarder. Timer . Peer forwarder’s timer capability provides the following information: . | requestForwardingLatency: Measures latency of requests forwarded by the peer forwarder client. | requestProcessingLatency: Measures latency of requests processed by the peer forwarder server. | . Counter . The following table provides counter metric options. | Value | Description | . | requests | Measures the total number of forwarded requests. | . | requestsFailed | Measures the total number of failed requests. Applies to requests with an HTTP response code other than 200. | . | requestsSuccessful | Measures the total number of successful requests. Applies to requests with HTTP response code 200. | . | requestsTooLarge | Measures the total number of requests that are too large to be written to the peer forwarder buffer. Applies to requests with HTTP response code 413. | . | requestTimeouts | Measures the total number of requests that time out while writing content to the peer forwarder buffer. Applies to requests with HTTP response code 408. | . | requestsUnprocessable | Measures the total number of requests that fail due to an unprocessable entity. Applies to requests with HTTP response code 422. | . | badRequests | Measures the total number of requests with a bad request format. Applies to requests with HTTP response code 400. | . | recordsSuccessfullyForwarded | Measures the total number of successfully forwarded records. | . | recordsFailedForwarding | Measures the total number of records that fail to be forwarded. | . | recordsToBeForwarded | Measures the total number of records to be forwarded. | . | recordsToBeProcessedLocally | Measures the total number of records to be processed locally. | . | recordsActuallyProcessedLocally | Measures the total number of records actually processed locally. This value is the sum of recordsToBeProcessedLocally and recordsFailedForwarding. | . | recordsReceivedFromPeers | Measures the total number of records received from remote peers. | . Gauge . peerEndpoints Measures the number of dynamically discovered peer Data Prepper endpoints. For static mode, the size is fixed. ",
+    "url": "https://naarcha-aws.github.io/managing-data-prepper/peer-forwarder/#metrics",
+    "relUrl": "/managing-data-prepper/peer-forwarder/#metrics"
+  },"105": {
+    "doc": "Pipeline sink",
+    "title": "Pipeline sink",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sinks/pipeline/",
+    "relUrl": "/pipelines/configuration/sinks/pipeline/"
+  },"106": {
+    "doc": "Pipeline sink",
+    "title": "Overview",
+    "content": "You can use the pipeline sink to write to another pipeline. | Option | Required | Type | Description | . | name | Yes | String | Name of the pipeline to write to. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sinks/pipeline/#overview",
+    "relUrl": "/pipelines/configuration/sinks/pipeline/#overview"
+  },"107": {
+    "doc": "Pipeline options",
+    "title": "Pipeline options",
+    "content": "This page provides information about pipeline configuration options in Data Prepper. ",
+    "url": "https://naarcha-aws.github.io/pipelines/pipelines-configuration-options/",
+    "relUrl": "/pipelines/pipelines-configuration-options/"
+  },"108": {
+    "doc": "Pipeline options",
+    "title": "General pipeline options",
+    "content": "| Option | Required | Type | Description | . | workers | No | Integer | Essentially the number of application threads. As a starting point for your use case, try setting this value to the number of CPU cores on the machine. Default is 1. | . | delay | No | Integer | Amount of time in milliseconds workers wait between buffer read attempts. Default is 3,000. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/pipelines-configuration-options/#general-pipeline-options",
+    "relUrl": "/pipelines/pipelines-configuration-options/#general-pipeline-options"
+  },"109": {
+    "doc": "Pipelines",
+    "title": "Pipelines",
+    "content": "The following image illustrates how a pipeline works. To use Data Prepper, you define pipelines in a configuration YAML file. Each pipeline is a combination of a source, a buffer, zero or more processors, and one or more sinks. For example: . simple-sample-pipeline: workers: 2 # the number of workers delay: 5000 # in milliseconds, how long workers wait between read attempts source: random: buffer: bounded_blocking: buffer_size: 1024 # max number of records the buffer accepts batch_size: 256 # max number of records the buffer drains after each read processor: - string_converter: upper_case: true sink: - stdout: . | Sources define where your data comes from. In this case, the source is a random UUID generator (random). | Buffers store data as it passes through the pipeline. By default, Data Prepper uses its one and only buffer, the bounded_blocking buffer, so you can omit this section unless you developed a custom buffer or need to tune the buffer settings. | Processors perform some action on your data: filter, transform, enrich, etc. You can have multiple processors, which run sequentially from top to bottom, not in parallel. The string_converter processor transform the strings by making them uppercase. | Sinks define where your data goes. In this case, the sink is stdout. | . Starting from Data Prepper 2.0, you can define pipelines across multiple configuration YAML files, where each file contains the configuration for one or more pipelines. This gives you more freedom to organize and chain complex pipeline configurations. For Data Prepper to load your pipeline configuration properly, place your configuration YAML files in the pipelines folder under your application’s home directory (e.g. /usr/share/data-prepper). ",
+    "url": "https://naarcha-aws.github.io/pipelines/pipelines/",
+    "relUrl": "/pipelines/pipelines/"
+  },"110": {
+    "doc": "Pipelines",
+    "title": "Conditional routing",
+    "content": "Pipelines also support conditional routing which allows you to route Events to different sinks based on specific conditions. To add conditional routing to a pipeline, specify a list of named routes under the route component and add specific routes to sinks under the routes property. Any sink with the routes property will only accept Events that match at least one of the routing conditions. In the following example, application-logs is a named route with a condition set to /log_type == \"application\". The route uses Data Prepper expressions to define the conditions. Data Prepper only routes events that satisfy the condition to the first OpenSearch sink. By default, Data Prepper routes all Events to a sink which does not define a route. In the example, all Events route into the third OpenSearch sink. conditional-routing-sample-pipeline: source: http: processor: route: - application-logs: '/log_type == \"application\"' - http-logs: '/log_type == \"apache\"' sink: - opensearch: hosts: [ \"https://opensearch:9200\" ] index: application_logs routes: [application-logs] - opensearch: hosts: [ \"https://opensearch:9200\" ] index: http_logs routes: [http-logs] - opensearch: hosts: [ \"https://opensearch:9200\" ] index: all_logs . ",
+    "url": "https://naarcha-aws.github.io/pipelines/pipelines/#conditional-routing",
+    "relUrl": "/pipelines/pipelines/#conditional-routing"
+  },"111": {
+    "doc": "Pipelines",
+    "title": "Examples",
+    "content": "This section provides some pipeline examples that you can use to start creating your own pipelines. For more pipeline configurations, select from the following options for each component: . | Buffers | Processors | Sinks | Sources | . The Data Prepper repository has several sample applications to help you get started. Log ingestion pipeline . The following example pipeline.yaml file with SSL and basic authentication enabled for the http-source demonstrates how to use the HTTP Source and Grok Prepper plugins to process unstructured log data: . log-pipeline: source: http: ssl_certificate_file: \"/full/path/to/certfile.crt\" ssl_key_file: \"/full/path/to/keyfile.key\" authentication: http_basic: username: \"myuser\" password: \"mys3cret\" processor: - grok: match: # This will match logs with a \"log\" key against the COMMONAPACHELOG pattern (ex: { \"log\": \"actual apache log...\" } ) # You should change this to match what your logs look like. See the grok documenation to get started. log: [ \"%{COMMONAPACHELOG}\" ] sink: - opensearch: hosts: [ \"https://localhost:9200\" ] # Change to your credentials username: \"admin\" password: \"admin\" # Add a certificate file if you are accessing an OpenSearch cluster with a self-signed certificate #cert: /path/to/cert # If you are connecting to an Amazon OpenSearch Service domain without # Fine-Grained Access Control, enable these settings. Comment out the # username and password above. #aws_sigv4: true #aws_region: us-east-1 # Since we are grok matching for apache logs, it makes sense to send them to an OpenSearch index named apache_logs. # You should change this to correspond with how your OpenSearch indices are set up. index: apache_logs . This example uses weak security. We strongly recommend securing all plugins which open external ports in production environments. Trace analytics pipeline . The following example demonstrates how to build a pipeline that supports the Trace Analytics OpenSearch Dashboards plugin. This pipeline takes data from the OpenTelemetry Collector and uses two other pipelines as sinks. These two separate pipelines index trace and the service map documents for the dashboard plugin. Starting from Data Prepper 2.0, Data Prepper no longer supports otel_trace_raw_prepper processor due to the Data Prepper internal data model evolution. Instead, users should use otel_trace_raw. entry-pipeline: delay: \"100\" source: otel_trace_source: ssl: false buffer: bounded_blocking: buffer_size: 10240 batch_size: 160 sink: - pipeline: name: \"raw-pipeline\" - pipeline: name: \"service-map-pipeline\" raw-pipeline: source: pipeline: name: \"entry-pipeline\" buffer: bounded_blocking: buffer_size: 10240 batch_size: 160 processor: - otel_trace_raw: sink: - opensearch: hosts: [\"https://localhost:9200\"] insecure: true username: admin password: admin index_type: trace-analytics-raw service-map-pipeline: delay: \"100\" source: pipeline: name: \"entry-pipeline\" buffer: bounded_blocking: buffer_size: 10240 batch_size: 160 processor: - service_map_stateful: sink: - opensearch: hosts: [\"https://localhost:9200\"] insecure: true username: admin password: admin index_type: trace-analytics-service-map . To maintain similar ingestion throughput and latency, scale the buffer_size and batch_size by the estimated maximum batch size in the client request payload. Metrics pipeline . Data Prepper supports metrics ingestion using OTel. It currently supports the following metric types: . | Gauge | Sum | Summary | Histogram | . Other types are not supported. Data Prepper drops all other types, including Exponential Histogram and Summary. Additionally, Data Prepper does not support Scope instrumentation. To set up a metrics pipeline: . metrics-pipeline: source: otel_metrics_source: processor: - otel_metrics_raw_processor: sink: - opensearch: hosts: [\"https://localhost:9200\"] username: admin password: admin . S3 log ingestion pipeline . The following example demonstrates how to use the S3Source and Grok Processor plugins to process unstructured log data from Amazon Simple Storage Service (Amazon S3). This example uses application load balancer logs. As the application load balancer writes logs to S3, S3 creates notifications in Amazon SQS. Data Prepper monitors those notifications and reads the S3 objects to get the log data and process it. log-pipeline: source: s3: notification_type: \"sqs\" compression: \"gzip\" codec: newline: sqs: queue_url: \"https://sqs.us-east-1.amazonaws.com/12345678910/ApplicationLoadBalancer\" aws: region: \"us-east-1\" sts_role_arn: \"arn:aws:iam::12345678910:role/Data-Prepper\" processor: - grok: match: message: [\"%{DATA:type} %{TIMESTAMP_ISO8601:time} %{DATA:elb} %{DATA:client} %{DATA:target} %{BASE10NUM:request_processing_time} %{DATA:target_processing_time} %{BASE10NUM:response_processing_time} %{BASE10NUM:elb_status_code} %{DATA:target_status_code} %{BASE10NUM:received_bytes} %{BASE10NUM:sent_bytes} \\\"%{DATA:request}\\\" \\\"%{DATA:user_agent}\\\" %{DATA:ssl_cipher} %{DATA:ssl_protocol} %{DATA:target_group_arn} \\\"%{DATA:trace_id}\\\" \\\"%{DATA:domain_name}\\\" \\\"%{DATA:chosen_cert_arn}\\\" %{DATA:matched_rule_priority} %{TIMESTAMP_ISO8601:request_creation_time} \\\"%{DATA:actions_executed}\\\" \\\"%{DATA:redirect_url}\\\" \\\"%{DATA:error_reason}\\\" \\\"%{DATA:target_list}\\\" \\\"%{DATA:target_status_code_list}\\\" \\\"%{DATA:classification}\\\" \\\"%{DATA:classification_reason}\"] - grok: match: request: [\"(%{NOTSPACE:http_method})? (%{NOTSPACE:http_uri})? (%{NOTSPACE:http_version})?\"] - grok: match: http_uri: [\"(%{WORD:protocol})?(://)?(%{IPORHOST:domain})?(:)?(%{INT:http_port})?(%{GREEDYDATA:request_uri})?\"] - date: from_time_received: true destination: \"@timestamp\" sink: - opensearch: hosts: [ \"https://localhost:9200\" ] username: \"admin\" password: \"admin\" index: alb_logs . ",
+    "url": "https://naarcha-aws.github.io/pipelines/pipelines/#examples",
+    "relUrl": "/pipelines/pipelines/#examples"
+  },"112": {
+    "doc": "Pipelines",
+    "title": "Migrating from Logstash",
+    "content": "Data Prepper supports Logstash configuration files for a limited set of plugins. Simply use the logstash config to run Data Prepper. docker run --name data-prepper \\ -v /full/path/to/logstash.conf:/usr/share/data-prepper/pipelines/pipelines.conf \\ opensearchproject/opensearch-data-prepper:latest . This feature is limited by feature parity of Data Prepper. As of Data Prepper 1.2 release, the following plugins from the Logstash configuration are supported: . | HTTP Input plugin | Grok Filter plugin | Elasticsearch Output plugin | Amazon Elasticsearch Output plugin | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/pipelines/#migrating-from-logstash",
+    "relUrl": "/pipelines/pipelines/#migrating-from-logstash"
+  },"113": {
+    "doc": "Pipelines",
+    "title": "Configure the Data Prepper server",
+    "content": "Data Prepper itself provides administrative HTTP endpoints such as /list to list pipelines and /metrics/prometheus to provide Prometheus-compatible metrics data. The port that has these endpoints has a TLS configuration and is specified by a separate YAML file. By default, these endpoints are secured by Data Prepper docker images. We strongly recommend providing your own configuration file for securing production environments. Here is an example data-prepper-config.yaml: . ssl: true keyStoreFilePath: \"/usr/share/data-prepper/keystore.jks\" keyStorePassword: \"password\" privateKeyPassword: \"other_password\" serverPort: 1234 . To configure the Data Prepper server, run Data Prepper with the additional yaml file. docker run --name data-prepper \\ -v /full/path/to/my-pipelines.yaml:/usr/share/data-prepper/pipelines/my-pipelines.yaml \\ -v /full/path/to/data-prepper-config.yaml:/usr/share/data-prepper/data-prepper-config.yaml \\ opensearchproject/data-prepper:latest . ",
+    "url": "https://naarcha-aws.github.io/pipelines/pipelines/#configure-the-data-prepper-server",
+    "relUrl": "/pipelines/pipelines/#configure-the-data-prepper-server"
+  },"114": {
+    "doc": "Pipelines",
+    "title": "Configure peer forwarder",
+    "content": "Data Prepper provides an HTTP service to forward Events between Data Prepper nodes for aggregation. This is required for operating Data Prepper in a clustered deployment. Currently, peer forwarding is supported in aggregate, service_map_stateful, and otel_trace_raw processors. Peer forwarder groups events based on the identification keys provided by the processors. For service_map_stateful and otel_trace_raw it’s traceId by default and can not be configured. For aggregate processor, it is configurable using identification_keys option. Peer forwarder supports peer discovery through one of three options: a static list, a DNS record lookup , or AWS Cloud Map. Peer discovery can be configured using discovery_mode option. Peer forwarder also supports SSL for verification and encryption, and mTLS for mutual authentication in a peer forwarding service. To configure peer forwarder, add configuration options to data-prepper-config.yaml mentioned in the Configure the Data Prepper server section: . peer_forwarder: discovery_mode: dns domain_name: \"data-prepper-cluster.my-domain.net\" ssl: true ssl_certificate_file: \"&lt;cert-file-path&gt;\" ssl_key_file: \"&lt;private-key-file-path&gt;\" authentication: mutual_tls: . ",
+    "url": "https://naarcha-aws.github.io/pipelines/pipelines/#configure-peer-forwarder",
+    "relUrl": "/pipelines/pipelines/#configure-peer-forwarder"
+  },"115": {
+    "doc": "Processors",
+    "title": "Processors",
+    "content": "Processors perform an action on your data, such as filtering, transforming, or enriching. Prior to Data Prepper 1.3, processors were named preppers. Starting in Data Prepper 1.3, the term prepper is deprecated in favor of the term processor. Data Prepper will continue to support the term prepper until 2.0, where it will be removed. ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/processors/",
+    "relUrl": "/pipelines/configuration/processors/processors/"
+  },"116": {
+    "doc": "rename_keys",
+    "title": "rename_keys",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/rename-keys/",
+    "relUrl": "/pipelines/configuration/processors/rename-keys/"
+  },"117": {
+    "doc": "rename_keys",
+    "title": "Overview",
+    "content": "The rename_keys processor renames keys in an event and is a mutate event processor. The following table describes the options you can use to configure the rename_keys processor. | Option | Required | Type | Description | . | entries | Yes | List | List of entries. Valid values are from_key, to_key, and overwrite_if_key_exists. Renaming occurs in the order defined. | . | from_key | N/A | N/A | The key of the entry to be renamed. | . | to_key | N/A | N/A | The new key of the entry. | . | overwrite_if_to_key_exists | No | Boolean | If true, the existing value gets overwritten if to_key already exists in the event. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/rename-keys/#overview",
+    "relUrl": "/pipelines/configuration/processors/rename-keys/#overview"
+  },"118": {
+    "doc": "routes",
+    "title": "Routes",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/routes/#routes",
+    "relUrl": "/pipelines/configuration/processors/routes/#routes"
+  },"119": {
+    "doc": "routes",
+    "title": "Overview",
+    "content": "Routes define conditions that can be used in sinks for conditional routing. Routes are specified at the same level as processors and sinks under the name route and consist of a list of key-value pairs, where the key is the name of a route and the value is a Data Prepper expression representing the routing condition. ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/routes/#overview",
+    "relUrl": "/pipelines/configuration/processors/routes/#overview"
+  },"120": {
+    "doc": "routes",
+    "title": "routes",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/routes/",
+    "relUrl": "/pipelines/configuration/processors/routes/"
+  },"121": {
+    "doc": "s3",
+    "title": "s3",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sources/s3/",
+    "relUrl": "/pipelines/configuration/sources/s3/"
+  },"122": {
+    "doc": "s3",
+    "title": "Overview",
+    "content": "s3 is a source plugin that reads events from Amazon Simple Storage Service (S3) (Amazon S3) objects. The following table describes options you can use to configure the s3 source. | Option | Required | Type | Description | . | notification_type | Yes | String | Must be sqs. | . | compression | No | String | The compression algorithm to apply: none, gzip, or automatic. Default value is none. | . | codec | Yes | Codec | The codec to apply. Must be newline, json, or csv. | . | sqs | Yes | sqs | The Amazon Simple Queue Service (SQS) (Amazon SQS) configuration. See sqs for details. | . | aws | Yes | aws | The AWS configuration. See aws for details. | . | on_error | No | String | Determines how to handle errors in Amazon SQS. Can be either retain_messages or delete_messages. If retain_messages, then Data Prepper will leave the message in the Amazon SQS queue and try again. This is recommended for dead-letter queues. If delete_messages, then Data Prepper will delete failed messages. Default value is retain_messages. | . | buffer_timeout | No | Duration | The amount of time allowed for for writing events to the Data Prepper buffer before timeout occurs. Any events that the Amazon S3 source cannot write to the buffer in this time will be discarded. Default value is 10 seconds. | . | records_to_accumulate | No | Integer | The number of messages that accumulate before writing to the buffer. Default value is 100. | . | metadata_root_key | No | String | Base key for adding S3 metadata to each Event. The metadata includes the key and bucket for each S3 object. Defaults to s3/. | . | disable_bucket_ownership_validation | No | Boolean | If true, the S3Source will not attempt to validate that the bucket is owned by the expected account. The expected account is the same account that owns the Amazon SQS queue. Defaults to false. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sources/s3/#overview",
+    "relUrl": "/pipelines/configuration/sources/s3/#overview"
+  },"123": {
+    "doc": "s3",
+    "title": "sqs",
+    "content": "The following parameters allow you to configure usage for Amazon SQS in the s3 source plugin. | Option | Required | Type | Description | . | queue_url | Yes | String | The URL of the Amazon SQS queue from which messages are received. | . | maximum_messages | No | Integer | The maximum number of messages to receive from the Amazon SQS queue in any single request. Default value is 10. | . | visibility_timeout | No | Duration | The visibility timeout to apply to messages read from the Amazon SQS queue. This should be set to the amount of time that Data Prepper may take to read all the Amazon S3 objects in a batch. Default value is 30s. | . | wait_time | No | Duration | The amount of time to wait for long polling on the Amazon SQS API. Default value is 20s. | . | poll_delay | No | Duration | A delay to place between reading/processing a batch of Amazon SQS messages and making a subsequent request. Default value is 0s. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sources/s3/#sqs",
+    "relUrl": "/pipelines/configuration/sources/s3/#sqs"
+  },"124": {
+    "doc": "s3",
+    "title": "aws",
+    "content": "| Option | Required | Type | Description | . | region | No | String | The AWS Region to use for credentials. Defaults to standard SDK behavior to determine the Region. | . | sts_role_arn | No | String | The AWS Security Token Service (AWS STS) role to assume for requests to Amazon SQS and Amazon S3. Defaults to null, which will use the standard SDK behavior for credentials. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sources/s3/#aws",
+    "relUrl": "/pipelines/configuration/sources/s3/#aws"
+  },"125": {
+    "doc": "s3",
+    "title": "file",
+    "content": "Source for flat file input. | Option | Required | Type | Description | . | path | Yes | String | The path to the input file (e.g. logs/my-log.log). | . | format | No | String | The format of each line in the file. Valid options are json or plain. Default value is plain. | . | record_type | No | String | The record type to store. Valid options are string or event. Default value is string. If you would like to use the file source for log analytics use cases like grok, set this option to event. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sources/s3/#file",
+    "relUrl": "/pipelines/configuration/sources/s3/#file"
+  },"126": {
+    "doc": "s3",
+    "title": "pipeline",
+    "content": "Source for reading from another pipeline. | Option | Required | Type | Description | . | name | Yes | String | Name of the pipeline to read from. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sources/s3/#pipeline",
+    "relUrl": "/pipelines/configuration/sources/s3/#pipeline"
+  },"127": {
+    "doc": "s3",
+    "title": "Metrics",
+    "content": "The s3 processor includes the following metrics. Counters . | s3ObjectsFailed: The number of Amazon S3 objects that the s3 source failed to read. | s3ObjectsNotFound: The number of Amazon S3 objects that the s3 source failed to read due to an Amazon S3 “Not Found” error. These are also counted toward s3ObjectsFailed. | s3ObjectsAccessDenied: The number of Amazon S3 objects that the s3 source failed to read due to an “Access Denied” or “Forbidden” error. These are also counted toward s3ObjectsFailed. | s3ObjectsSucceeded: The number of Amazon S3 objects that the s3 source successfully read. | sqsMessagesReceived: The number of Amazon SQS messages received from the queue by the s3 source. | sqsMessagesDeleted: The number of Amazon SQS messages deleted from the queue by the s3 source. | sqsMessagesFailed: The number of Amazon SQS messages that the s3 source failed to parse. | . Timers . | s3ObjectReadTimeElapsed: Measures the amount of time the s3 source takes to perform a request to GET an S3 object, parse it, and write events to the buffer. | sqsMessageDelay: Measures the amount of time from when Amazon S3 creates an object to when it is fully parsed. | . Distribution summaries . | s3ObjectSizeBytes: Measures the size of Amazon S3 objects as reported by the Amazon S3 Content-Length. For compressed objects, this is the compressed size. | s3ObjectProcessedBytes: Measures the bytes processed by the s3 source for a given object. For compressed objects, this is the uncompressed size. | s3ObjectsEvents: Measures the number of events (sometimes called records) produced by an Amazon S3 object. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sources/s3/#metrics",
+    "relUrl": "/pipelines/configuration/sources/s3/#metrics"
+  },"128": {
+    "doc": "service_map_stateful",
+    "title": "service_map_stateful",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/service-map-stateful/",
+    "relUrl": "/pipelines/configuration/processors/service-map-stateful/"
+  },"129": {
+    "doc": "service_map_stateful",
+    "title": "Overview",
+    "content": "The service_map_stateful processor uses OpenTelemetry data to create a distributed service map for visualization in OpenSearch Dashboards. The following table describes the option you can use to configure the service_map_stateful processor. | Option | Required | Type | Description | . | window_duration | No | Integer | Represents the fixed time window, in seconds, during which service map relationships are evaluated. Default value is 180. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/service-map-stateful/#overview",
+    "relUrl": "/pipelines/configuration/processors/service-map-stateful/#overview"
+  },"130": {
+    "doc": "service_map_stateful",
+    "title": "Metrics",
+    "content": "The following table describes common Abstract processor metrics. | Metric name | Type | Description | . | recordsIn | Counter | Metric representing the ingress of records to a pipeline component. | . | recordsOut | Counter | Metric representing the egress of records from a pipeline component. | . | timeElapsed | Timer | Metric representing the time elapsed during execution of a pipeline component. | . The service-map-stateful processor includes following custom metrics: . | traceGroupCacheCount: The number of trace groups in the trace group cache. | spanSetCount: The number of span sets in the span set collection. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/service-map-stateful/#metrics",
+    "relUrl": "/pipelines/configuration/processors/service-map-stateful/#metrics"
+  },"131": {
+    "doc": "Sinks",
+    "title": "Sinks",
+    "content": "Sinks define where Data Prepper writes your data to. ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sinks/sinks/",
+    "relUrl": "/pipelines/configuration/sinks/sinks/"
+  },"132": {
+    "doc": "Sinks",
+    "title": "General options for all sink types",
+    "content": "The following table describes options you can use to configure the sinks sink. | Option | Required | Type | Description | . | routes | No | List | List of routes that the sink accepts. If not specified, the sink accepts all upstream events. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sinks/sinks/#general-options-for-all-sink-types",
+    "relUrl": "/pipelines/configuration/sinks/sinks/#general-options-for-all-sink-types"
+  },"133": {
+    "doc": "service_map_stateful",
+    "title": "Sinks",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/sinks/#sinks",
+    "relUrl": "/pipelines/configuration/processors/sinks/#sinks"
+  },"134": {
+    "doc": "service_map_stateful",
+    "title": "Overview",
+    "content": "Sinks define where Data Prepper writes your data to. ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/sinks/#overview",
+    "relUrl": "/pipelines/configuration/processors/sinks/#overview"
+  },"135": {
+    "doc": "service_map_stateful",
+    "title": "service_map_stateful",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/sinks/",
+    "relUrl": "/pipelines/configuration/processors/sinks/"
+  },"136": {
+    "doc": "Sources",
+    "title": "Sources",
+    "content": "Sources define where your data comes from within a Data Prepper pipeline. ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sources/sources/",
+    "relUrl": "/pipelines/configuration/sources/sources/"
+  },"137": {
+    "doc": "split_string",
+    "title": "split_string",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/split-string/",
+    "relUrl": "/pipelines/configuration/processors/split-string/"
+  },"138": {
+    "doc": "split_string",
+    "title": "Overview",
+    "content": "The split_string processor splits a field into an array using a delimiting character and is a mutate string processor. The following table describes the options you can use to configure the split_string processor. | Option | Required | Type | Description | . | entries | Yes | List | List of entries. Valid values are source, delimiter, and delimiter_regex. | . | source | N/A | N/A | The key to split. | . | delimiter | No | N/A | The separator character responsible for the split. Cannot be defined at the same time as delimiter_regex. At least delimiter or delimiter_regex must be defined. | . | delimiter_regex | No | N/A | The regex string responsible for the split. Cannot be defined at the same time as delimiter. At least delimiter or delimiter_regex must be defined. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/split-string/#overview",
+    "relUrl": "/pipelines/configuration/processors/split-string/#overview"
+  },"139": {
+    "doc": "stdout sink",
+    "title": "stdout sink",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sinks/stdout/",
+    "relUrl": "/pipelines/configuration/sinks/stdout/"
+  },"140": {
+    "doc": "stdout sink",
+    "title": "Overview",
+    "content": "You can use the stdout sink for console output and testing. It has no configurable options. ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/sinks/stdout/#overview",
+    "relUrl": "/pipelines/configuration/sinks/stdout/#overview"
+  },"141": {
+    "doc": "string_converter",
+    "title": "string_converter",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/string-converter/",
+    "relUrl": "/pipelines/configuration/processors/string-converter/"
+  },"142": {
+    "doc": "string_converter",
+    "title": "Overview",
+    "content": "The string_converter processor converts a string to uppercase or lowercase. You can use it as an example for developing your own processor. The following table describes the option you can use to configure the string_converter processor. | Option | Required | Type | Description | . | upper_case | No | Boolean | Whether to convert to uppercase (true) or lowercase (false). | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/string-converter/#overview",
+    "relUrl": "/pipelines/configuration/processors/string-converter/#overview"
+  },"143": {
+    "doc": "substitute_string",
+    "title": "substitute_string",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/substitute-string/",
+    "relUrl": "/pipelines/configuration/processors/substitute-string/"
+  },"144": {
+    "doc": "substitute_string",
+    "title": "Overview",
+    "content": "The substitute_string processor matches a key’s value against a regular expression and replaces all matches with a replacement string. substitute_string is a mutate string processor. The following table describes the options you can use to configure the substitue_string processor. | Option | Required | Type | Description | . | entries | Yes | List | List of entries. Valid values are source, from, and to. | . | source | N/A | N/A | The key to modify. | . | from | N/A | N/A | The Regex String to be replaced. Special regex characters such as [ and ] must be escaped using \\\\ when using double quotes and \\ when using single quotes. See Java Patterns for more information. | . | to | N/A | N/A | The String to be substituted for each match of from. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/substitute-string/#overview",
+    "relUrl": "/pipelines/configuration/processors/substitute-string/#overview"
+  },"145": {
+    "doc": "Trace analytics",
+    "title": "Trace analytics",
+    "content": "Trace analytics allows you to collect trace data and customize a pipeline that ingests and transforms the data for use in OpenSearch. The following provides an overview of the trace analytics workflow in Data Prepper, how to configure it, and how to visualize trace data. ",
+    "url": "https://naarcha-aws.github.io/common-use-cases/trace-analytics/",
+    "relUrl": "/common-use-cases/trace-analytics/"
+  },"146": {
+    "doc": "Trace analytics",
+    "title": "Introduction",
+    "content": "When using Data Prepper as a server-side component to collect trace data, you can customize a Data Prepper pipeline to ingest and transform the data for use in OpenSearch. Upon transformation, you can visualize the transformed trace data for use with the Observability plugin inside of OpenSearch Dashboards. Trace data provides visibility into your application’s performance, and helps you gain more information about individual traces. The following flowchart illustrates the trace analytics workflow, from running OpenTelemetry Collector to using OpenSearch Dashboards for visualization. To monitor trace analytics, you need to set up the following components in your service environment: . | Add instrumentation to your application so it can generate telemetry data and send it to an OpenTelemetry collector. | Run an OpenTelemetry collector as a sidecar or daemonset for Amazon Elastic Kubernetes Service (Amazon EKS), a sidecar for Amazon Elastic Container Service (Amazon ECS), or an agent on Amazon Elastic Compute Cloud (Amazon EC2). You should configure the collector to export trace data to Data Prepper. | Deploy Data Prepper as the ingestion collector for OpenSearch. Configure it to send the enriched trace data to your OpenSearch cluster or to the Amazon OpenSearch Service domain. | Use OpenSearch Dashboards to visualize and detect problems in your distributed applications. | . ",
+    "url": "https://naarcha-aws.github.io/common-use-cases/trace-analytics/#introduction",
+    "relUrl": "/common-use-cases/trace-analytics/#introduction"
+  },"147": {
+    "doc": "Trace analytics",
+    "title": "Trace analytics pipeline",
+    "content": "To monitor trace analytics in Data Prepper, we provide three pipelines: entry-pipeline, raw-trace-pipeline, and service-map-pipeline. The following image provides an overview of how the pipelines work together to monitor trace analytics. OpenTelemetry trace source . The OpenTelemetry source accepts trace data from the OpenTelemetry Collector. The source follows the OpenTelemetry Protocol and officially supports transport over gRPC and the use of industry-standard encryption (TLS/HTTPS). Processor . There are three processors for the trace analytics feature: . | otel_trace_raw - The otel_trace_raw processor receives a collection of span records from otel-trace-source, and performs stateful processing, extraction, and completion of trace-group-related fields. | otel_trace_group - The otel_trace_group processor fills in the missing trace-group-related fields in the collection of span records by looking up the OpenSearch backend. | service_map_stateful – The service_map_stateful processor performs the required preprocessing for trace data and builds metadata to display the service-map dashboards. | . OpenSearch sink . OpenSearch provides a generic sink that writes data to OpenSearch as the destination. The OpenSearch sink has configuration options related to the OpenSearch cluster, such as endpoint, SSL, username/password, index name, index template, and index state management. The sink provides specific configurations for the trace analytics feature. These configurations allow the sink to use indexes and index templates specific to trace analytics. The following OpenSearch indexes are specific to trace analytics: . | otel-v1-apm-span – The otel-v1-apm-span index stores the output from the otel_trace_raw processor. | otel-v1-apm-service-map – The otel-v1-apm-service-map index stores the output from the service_map_stateful processor. | . ",
+    "url": "https://naarcha-aws.github.io/common-use-cases/trace-analytics/#trace-analytics-pipeline",
+    "relUrl": "/common-use-cases/trace-analytics/#trace-analytics-pipeline"
+  },"148": {
+    "doc": "Trace analytics",
+    "title": "Trace tuning",
+    "content": "Starting with version 0.8.x, Data Prepper supports both vertical and horizontal scaling for trace analytics. You can adjust the size of a single Data Prepper instance to meet your workload’s demands and scale vertically. You can scale horizontally by using the core peer forwarder to deploy multiple Data Prepper instances to form a cluster. This enables Data Prepper instances to communicate with instances in the cluster and is required for horizontally scaling deployments. Scaling recommendations . Use the following recommended configurations to scale Data Prepper. We recommend that you modify parameters based on the requirements. We also recommend that you monitor the Data Prepper host metrics and OpenSearch metrics to ensure that the configuration works as expected. Buffer . The total number of trace requests processed by Data Prepper is equal to the sum of the buffer_size values in otel-trace-pipeline and raw-pipeline. The total number of trace requests sent to OpenSearch is equal to the product of batch_size and workers in raw-trace-pipeline. For more information about raw-pipeline, see Trace analytics pipeline. We recommend the following when making changes to buffer settings: . | The buffer_size value in otel-trace-pipeline and raw-pipeline should be the same. | The buffer_size should be greater than or equal to workers * batch_size in the raw-pipeline. | . Workers . The workers setting determines the number of threads that are used by Data Prepper to process requests from the buffer. We recommend that you set workers based on the CPU utilization. This value can be higher than the number of available processors because Data Prepper uses significant input/output time when sending data to OpenSearch. Heap . Configure the Data Prepper heap by setting the JVM_OPTS environment variable. We recommend that you set the heap value to a minimum value of 4 * batch_size * otel_send_batch_size * maximum size of indvidual span. As mentioned in the OpenTelemetry Collector section, set otel_send_batch_size to a value of 50 in your OpenTelemetry Collector configuration. Local disk . Data Prepper uses the local disk to store metadata required for service map processing, so we recommend storing only the following key fields: traceId, spanId, parentSpanId, spanKind, spanName, and serviceName. The service-map plugin stores only two files, each of which stores window_duration seconds of data. As an example, testing with a throughput of 3000 spans/second resulted in the total disk usage of 4 MB. Data Prepper also uses the local disk to write logs. In the most recent version of Data Prepper, you can redirect the logs to your preferred path. AWS CloudFormation template and Kubernetes/Amazon EKS configuration files . The AWS CloudFormation template provides a user-friendly mechanism for configuring the scaling attributes described in the Trace tuning section. The Kubernetes configuration files and Amazon EKS configuration files are available for configuring these attributes in a cluster deployment. Benchmark tests . The benchmark tests were performed on an r5.xlarge EC2 instance with the following configuration: . | buffer_size: 4096 | batch_size: 256 | workers: 8 | Heap: 10 GB | . This setup was able to handle a throughput of 2100 spans/second at 20 percent CPU utilization. ",
+    "url": "https://naarcha-aws.github.io/common-use-cases/trace-analytics/#trace-tuning",
+    "relUrl": "/common-use-cases/trace-analytics/#trace-tuning"
+  },"149": {
+    "doc": "Trace analytics",
+    "title": "Pipeline configuration",
+    "content": "The following sections provide examples of different types of pipelines and how to configure each type. Example: Trace analytics pipeline . The following example demonstrates how to build a pipeline that supports the OpenSearch Dashboards Observability plugin. This pipeline takes data from the OpenTelemetry Collector and uses two other pipelines as sinks. These two separate pipelines serve two different purposes and write to different OpenSearch indexes. The first pipeline prepares trace data for OpenSearch and enriches and ingests the span documents into a span index within OpenSearch. The second pipeline aggregates traces into a service map and writes service map documents into a service map index within OpenSearch. Starting with Data Prepper version 2.0, Data Prepper no longer supports the otel_trace_raw_prepper processor. The otel_trace_raw processor replaces the otel_trace_raw_prepper processor and supports some of Data Prepper’s recent data model changes. Instead, you should use the otel_trace_raw processor. See the following YAML file example: . entry-pipeline: delay: \"100\" source: otel_trace_source: ssl: false buffer: bounded_blocking: buffer_size: 10240 batch_size: 160 sink: - pipeline: name: \"raw-trace-pipeline\" - pipeline: name: \"service-map-pipeline\" raw-pipeline: source: pipeline: name: \"entry-pipeline\" buffer: bounded_blocking: buffer_size: 10240 batch_size: 160 processor: - otel_trace_raw: sink: - opensearch: hosts: [\"https://localhost:9200\"] insecure: true username: admin password: admin index_type: trace-analytics-raw service-map-pipeline: delay: \"100\" source: pipeline: name: \"entry-pipeline\" buffer: bounded_blocking: buffer_size: 10240 batch_size: 160 processor: - service_map_stateful: sink: - opensearch: hosts: [\"https://localhost:9200\"] insecure: true username: admin password: admin index_type: trace-analytics-service-map . To maintain similar ingestion throughput and latency, scale the buffer_size and batch_size by the estimated maximum batch size in the client request payload. {: .tip} . Example: otel trace . The following is an example otel-trace-source .yaml file with SSL and basic authentication enabled. Note that you will need to modify your otel-collector-config.yaml file so that it uses your own credentials. source: otel_trace_source: #record_type: event # Add this when using Data Prepper 1.x. This option is removed in 2.0 ssl: true sslKeyCertChainFile: \"/full/path/to/certfile.crt\" sslKeyFile: \"/full/path/to/keyfile.key\" authentication: http_basic: username: \"my-user\" password: \"my_s3cr3t\" . Example: pipeline.yaml . The following is an example pipeline.yaml file without SSL and basic authentication enabled for the otel-trace-pipeline pipeline: . otel-trace-pipeline: # workers is the number of threads processing data in each pipeline. # We recommend same value for all pipelines. # default value is 1, set a value based on the machine you are running Data Prepper workers: 8 # delay in milliseconds is how often the worker threads should process data. # Recommend not to change this config as we want the entry-pipeline to process as quick as possible # default value is 3_000 ms delay: \"100\" source: otel_trace_source: #record_type: event # Add this when using Data Prepper 1.x. This option is removed in 2.0 ssl: false # Change this to enable encryption in transit authentication: unauthenticated: buffer: bounded_blocking: # buffer_size is the number of ExportTraceRequest from otel-collector the data prepper should hold in memeory. # We recommend to keep the same buffer_size for all pipelines. # Make sure you configure sufficient heap # default value is 512 buffer_size: 512 # This is the maximum number of request each worker thread will process within the delay. # Default is 8. # Make sure buffer_size &gt;= workers * batch_size batch_size: 8 sink: - pipeline: name: \"raw-trace-pipeline\" - pipeline: name: \"entry-pipeline\" raw-pipeline: # Configure same as the otel-trace-pipeline workers: 8 # We recommend using the default value for the raw-pipeline. delay: \"3000\" source: pipeline: name: \"entry-pipeline\" buffer: bounded_blocking: # Configure the same value as in entry-pipeline # Make sure you configure sufficient heap # The default value is 512 buffer_size: 512 # The raw processor does bulk request to your OpenSearch sink, so configure the batch_size higher. # If you use the recommended otel-collector setup each ExportTraceRequest could contain max 50 spans. https://github.com/opensearch-project/data-prepper/tree/v0.7.x/deployment/aws # With 64 as batch size each worker thread could process upto 3200 spans (64 * 50) batch_size: 64 processor: - otel_trace_raw: - otel_trace_group: hosts: [ \"https://localhost:9200\" ] # Change to your credentials username: \"admin\" password: \"admin\" # Add a certificate file if you are accessing an OpenSearch cluster with a self-signed certificate #cert: /path/to/cert # If you are connecting to an Amazon OpenSearch Service domain without # Fine-Grained Access Control, enable these settings. Comment out the # username and password above. #aws_sigv4: true #aws_region: us-east-1 sink: - opensearch: hosts: [ \"https://localhost:9200\" ] index_type: trace-analytics-raw # Change to your credentials username: \"admin\" password: \"admin\" # Add a certificate file if you are accessing an OpenSearch cluster with a self-signed certificate #cert: /path/to/cert # If you are connecting to an Amazon OpenSearch Service domain without # Fine-Grained Access Control, enable these settings. Comment out the # username and password above. #aws_sigv4: true #aws_region: us-east-1 service-map-pipeline: workers: 8 delay: \"100\" source: pipeline: name: \"entry-pipeline\" processor: - service_map_stateful: # The window duration is the maximum length of time the data prepper stores the most recent trace data to evaluvate service-map relationships. # The default is 3 minutes, this means we can detect relationships between services from spans reported in last 3 minutes. # Set higher value if your applications have higher latency. window_duration: 180 buffer: bounded_blocking: # buffer_size is the number of ExportTraceRequest from otel-collector the data prepper should hold in memeory. # We recommend to keep the same buffer_size for all pipelines. # Make sure you configure sufficient heap # default value is 512 buffer_size: 512 # This is the maximum number of request each worker thread will process within the delay. # Default is 8. # Make sure buffer_size &gt;= workers * batch_size batch_size: 8 sink: - opensearch: hosts: [ \"https://localhost:9200\" ] index_type: trace-analytics-service-map # Change to your credentials username: \"admin\" password: \"admin\" # Add a certificate file if you are accessing an OpenSearch cluster with a self-signed certificate #cert: /path/to/cert # If you are connecting to an Amazon OpenSearch Service domain without # Fine-Grained Access Control, enable these settings. Comment out the # username and password above. #aws_sigv4: true #aws_region: us-east-1 . You need to modify the preceding configuration for your OpenSearch cluster so that the configuration matches your environment. Note that it has two opensearch sinks that need to be modified. You must make the following changes: . | hosts – Set to your hosts. | username – Provide your OpenSearch username. | password – Provide your OpenSearch password. | aws_sigv4 – If you are using Amazon OpenSearch Service with AWS signing, set this value to true. It will sign requests with the default AWS credentials provider. | aws_region – If you are using Amazon OpenSearch Service with AWS signing, set this value to your AWS Region. | . For other configurations available for OpenSearch sinks, see Data Prepper OpenSearch sink. ",
+    "url": "https://naarcha-aws.github.io/common-use-cases/trace-analytics/#pipeline-configuration",
+    "relUrl": "/common-use-cases/trace-analytics/#pipeline-configuration"
+  },"150": {
+    "doc": "Trace analytics",
+    "title": "OpenTelemetry Collector",
+    "content": "You need to run OpenTelemetry Collector in your service environment. Follow Getting Started to install an OpenTelemetry collector. Ensure that you configure the collector with an exporter configured for your Data Prepper instance. The following example otel-collector-config.yaml file receives data from various instrumentations and exports it to Data Prepper. Example otel-collector-config.yaml file . The following is an example otel-collector-config.yaml file: . receivers: jaeger: protocols: grpc: otlp: protocols: grpc: zipkin: processors: batch/traces: timeout: 1s send_batch_size: 50 exporters: otlp/data-prepper: endpoint: localhost:21890 tls: insecure: true service: pipelines: traces: receivers: [jaeger, otlp, zipkin] processors: [batch/traces] exporters: [otlp/data-prepper] . After you run OpenTelemetry in your service environment, you must configure your application to use the OpenTelemetry Collector. The OpenTelemetry Collector typically runs alongside your application. ",
+    "url": "https://naarcha-aws.github.io/common-use-cases/trace-analytics/#opentelemetry-collector",
+    "relUrl": "/common-use-cases/trace-analytics/#opentelemetry-collector"
+  },"151": {
+    "doc": "Trace analytics",
+    "title": "Next steps and more information",
+    "content": "The OpenSearch Dashboards Observability plugin documentation provides additional information about configuring OpenSearch to view trace analytics in OpenSearch Dashboards. For more information about how to tune and scale Data Prepper for trace analytics, see Trace tuning. ",
+    "url": "https://naarcha-aws.github.io/common-use-cases/trace-analytics/#next-steps-and-more-information",
+    "relUrl": "/common-use-cases/trace-analytics/#next-steps-and-more-information"
+  },"152": {
+    "doc": "Trace analytics",
+    "title": "Migrating to Data Prepper 2.0",
+    "content": "Starting with Data Prepper version 1.4, trace processing uses Data Prepper’s event model. This allows pipeline authors to configure other processors to modify spans or traces. To provide a migration path, Data Prepper version 1.4 introduced the following changes: . | otel_trace_source has an optional record_type parameter that can be set to event. When configured, it will output event objects. | otel_trace_raw replaces otel_trace_raw_prepper for event-based spans. | otel_trace_group replaces otel_trace_group_prepper for event-based spans. | . In Data Prepper version 2.0, otel_trace_source will only output events. Data Prepper version 2.0 also removes otel_trace_raw_prepper and otel_trace_group_prepper entirely. To migrate to Data Prepper version 2.0, you can configure your trace pipeline using the event model. ",
+    "url": "https://naarcha-aws.github.io/common-use-cases/trace-analytics/#migrating-to-data-prepper-20",
+    "relUrl": "/common-use-cases/trace-analytics/#migrating-to-data-prepper-20"
+  },"153": {
+    "doc": "trim_string",
+    "title": "trim_string",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/trim-string/",
+    "relUrl": "/pipelines/configuration/processors/trim-string/"
+  },"154": {
+    "doc": "trim_string",
+    "title": "Overview",
+    "content": "The trim_string processor removes whitespace from the beginning and end of a key and is a mutate string processor. The following table describes the option you can use to configure the trim_string processor. | Option | Required | Type | Description | . | with_keys | Yes | List | A list of keys to trim the whitespace from. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/trim-string/#overview",
+    "relUrl": "/pipelines/configuration/processors/trim-string/#overview"
+  },"155": {
+    "doc": "uppercase_string",
+    "title": "uppercase_string",
+    "content": " ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/uppercase-string/",
+    "relUrl": "/pipelines/configuration/processors/uppercase-string/"
+  },"156": {
+    "doc": "uppercase_string",
+    "title": "Overview",
+    "content": "The uppercase_string processor converts an entire string to uppercase and is a mutate string processor. The following table describes the option you can use to configure the uppercase_string processor. | Option | Required | Type | Description | . | with_keys | Yes | List | A list of keys to convert to uppercase. | . ",
+    "url": "https://naarcha-aws.github.io/pipelines/configuration/processors/uppercase-string/#overview",
+    "relUrl": "/pipelines/configuration/processors/uppercase-string/#overview"
+  }
+}
